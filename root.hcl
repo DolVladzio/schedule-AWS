@@ -7,8 +7,8 @@ remote_state {
   }
 
   config = {
-	bucket = "schedule-state-bucket"
-	region  = "eu-central-1"
+	bucket = get_env("BUCKET_NAME")
+	region  = get_env("AWS_REGION")
     key = "${path_relative_to_include()}/terraform.tfstate"
 	encrypt = true
   }
@@ -19,7 +19,7 @@ generate "provider" {
   if_exists = "overwrite_terragrunt"
   contents = <<EOF
 	provider "aws" {
-		region  = "eu-central-1"
+		region  = "$${var.aws_region}"
 	}
 EOF
 }
