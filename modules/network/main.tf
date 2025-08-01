@@ -95,5 +95,22 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public[each.value.vpc_id].id
 }
 ##################################################################
+resource "aws_route_table" "private" {
+  for_each = { for k, v in local.vpcs : k => v if local.vpc_has_private_subnets[k] }
 
+  vpc_id = aws_vpc.main-vpc[each.key].id
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.nt[each.key].id
+  }
+
+  tags = { Name = "${each.value.name}-private-rt" }
+}
+##################################################################
+resource "aws_route_table_association" "private" {
+  for_each = local.private_subnets
+
+  subnet_id      = aws_subnet.subnets[each.key].id
+  route_table_id = aws_route_table.private[each.value.vpc_id].id
+}
 ##################################################################
