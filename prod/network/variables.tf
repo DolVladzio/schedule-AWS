@@ -6,8 +6,14 @@ variable "aws_region" {
 ##################################################################
 variable "vpc" {
   type = list(object({
-    name            = string
-    vpc_cidr_block  = string
+    name           = string
+    vpc_cidr_block = string
+    subnets = list(object({
+      name       = string
+      cidr_block = string
+      public     = bool
+      zone       = string
+    }))
   }))
   description = "List of VPC configurations"
 }
