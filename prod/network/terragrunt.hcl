@@ -12,8 +12,7 @@ locals {
 }
 ##################################################################
 inputs = {
-	vpc_name = local.config.name
-	vpc_cidr_block = local.config.vpc_cidr_block
+	vpc = local.config.vpc
 	aws_region = local.config.aws_region
 }
 ##################################################################

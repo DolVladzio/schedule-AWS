@@ -1,8 +1,14 @@
 ##################################################################
+locals {
+  vpcs_map = { for vpc in var.vpc : vpc.name => vpc }
+}
+##################################################################
 resource "aws_vpc" "main-vpc" {
-  cidr_block = var.vpc_cidr_block
+  for_each = local.vpcs_map
+
+  cidr_block = each.value.vpc_cidr_block
   tags = {
-    Name = var.vpc_name
+    Name = each.value.name
   }
 }
 ##################################################################

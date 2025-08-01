@@ -1,5 +1,10 @@
 {
-	"name": "main-vpc",
-	"vpc_cidr_block": "10.1.0.0/16",
-	"aws_region": "eu-central-1"
+	"aws_region": "eu-central-1",
+
+	"vpc": [
+		{
+			"name": "main-vpc",
+			"vpc_cidr_block": "10.1.0.0/16"
+		}
+	]
 }
