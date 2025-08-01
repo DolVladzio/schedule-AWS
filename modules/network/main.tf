@@ -35,9 +35,7 @@ resource "aws_vpc" "main-vpc" {
 
   cidr_block = each.value.vpc_cidr_block
 
-  tags = {
-    Name = each.value.name
-  }
+  tags = { Name = each.value.name }
 }
 ##################################################################
 resource "aws_subnet" "subnets" {
@@ -48,9 +46,7 @@ resource "aws_subnet" "subnets" {
   availability_zone       = each.value.availability_zone
   map_public_ip_on_launch = each.value.public
 
-  tags = {
-    Name = each.value.name
-  }
+  tags = { Name = each.value.name }
 }
 ##################################################################
 resource "aws_internet_gateway" "gw" {
@@ -58,9 +54,7 @@ resource "aws_internet_gateway" "gw" {
 
   vpc_id = aws_vpc.main-vpc[each.key].id
 
-  tags = {
-    Name = "${each.value.name}-igw"
-  }
+  tags = { Name = "${each.value.name}-igw" }
 }
 ##################################################################
 resource "aws_eip" "nat" {
@@ -68,9 +62,8 @@ resource "aws_eip" "nat" {
 
   domain     = "vpc"
   depends_on = [aws_internet_gateway.gw]
-  tags = {
-    Name = "${each.value.name}-eip"
-  }
+  
+  tags = { Name = "${each.value.name}-eip" }
 }
 ##################################################################
 resource "aws_nat_gateway" "nt" {
@@ -79,8 +72,28 @@ resource "aws_nat_gateway" "nt" {
   allocation_id = aws_eip.nat[each.key].id
   subnet_id     = aws_subnet.subnets[local.first_public_subnet].id
   depends_on    = [aws_internet_gateway.gw]
-  tags = {
-    Name = "${each.value.name}-nat-gateway"
-  }
+  
+  tags = { Name = "${each.value.name}-nat-gateway" }
 }
+##################################################################
+resource "aws_route_table" "public" {
+  for_each = { for k, v in local.vpcs : k => v if local.vpc_has_public_subnets[k] }
+
+  vpc_id = aws_vpc.main-vpc[each.key].id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.gw[each.key].id
+  }
+
+  tags = { Name = "${each.value.name}-public-rt" }
+}
+##################################################################
+resource "aws_route_table_association" "public" {
+  for_each = local.public_subnets
+
+  subnet_id      = aws_subnet.subnets[each.key].id
+  route_table_id = aws_route_table.public[each.value.vpc_id].id
+}
+##################################################################
+
 ##################################################################
