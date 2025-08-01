@@ -8,6 +8,7 @@ output "subnets" {
   }
 }
 ##################################################################
+# EIP ip list for a view
 output "nat_eip_ip_list" {
   value = [for eip in aws_eip.nat : eip.public_ip]
 }
