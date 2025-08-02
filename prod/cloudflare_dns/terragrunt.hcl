@@ -26,6 +26,7 @@ inputs = merge(
   {
     aws_region           = local.config.aws_region
     dns_records_config   = local.config.dns_records_config
+    cloudflare_api_token = get_env("CLOUDFLARE_API_TOKEN")
   },
   dependency.network.outputs
 )
