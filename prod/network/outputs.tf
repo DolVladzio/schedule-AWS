@@ -13,8 +13,8 @@ output "nat_eip_ip_list" {
   value = {
     for name, ip in aws_eip.nat :
     "${replace(name, "-", "_")}_eip" => {
-      id  = ip.id
-      ip  = ip.public_ip
+      id = ip.id
+      ip = ip.public_ip
     }
   }
 }
