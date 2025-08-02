@@ -43,26 +43,17 @@
 				{
 					"protocol": "tcp",
 					"port": 80,
-					"destination": {
-						"dev": "public",
-						"prod": "public"
-					}
+					"destination": "public"
 				},
 				{
 					"protocol": "tcp",
 					"port": 443,
-					"destination": {
-						"dev": "public",
-						"prod": "public"
-					}
+					"destination": "public"
 				},
 				{
 					"protocol": "udp",
 					"port": 53,
-					"destination": {
-						"dev": "public",
-						"prod": "public"
-					}
+					"destination": "public"
 				}
 			]
 		},			
@@ -74,49 +65,29 @@
 				{
 					"port": 22,
 					"protocol": "tcp",
-					"attach_to": "bastion"
+					"attach_to": "public"
 				}
 			],
 			"egress": [
 				{
 					"protocol": "tcp",
 					"port": 22,
-					"destination": {
-						"dev": "dev-k3s-sg",
-						"prod": "k3s-sg"
-					}
-				},
-				{
-					"protocol": "tcp",
-					"port": 22,
-					"destination": {
-						"dev": "dev-db-sg",
-						"prod": "db-sg"
-					}
+					"destination": "db-sg"
 				},
 				{
 					"protocol": "tcp",
 					"port": 80,
-					"destination": {
-						"dev": "public",
-						"prod": "public"
-					}
+					"destination": "public"
 				},
 				{
 					"protocol": "tcp",
 					"port": 443,
-					"destination": {
-						"dev": "public",
-						"prod": "public"
-					}
+					"destination": "public"
 				},
 				{
 					"protocol": "udp",
 					"port": 53,
-					"destination": {
-						"dev": "public",
-						"prod": "public"
-					}
+					"destination": "public"
 				}
 			]
 		}

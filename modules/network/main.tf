@@ -139,6 +139,37 @@ resource "aws_vpc_security_group_ingress_rule" "all" {
     ]) : "${item.sg_name}-${item.attach_to}" => item
   }
 
+  lifecycle {
+    create_before_destroy = true
+  }
+
+  security_group_id = aws_security_group.all[each.value.sg_name].id
+  from_port         = each.value.port
+  to_port           = each.value.port
+  ip_protocol       = each.value.protocol
+
+  referenced_security_group_id = aws_security_group.all[each.value.sg_name].id
+}
+##################################################################
+resource "aws_vpc_security_group_egress_rule" "all" {
+  for_each = {
+    for item in flatten([
+      for sg in var.security_groups : [
+        for rule in sg.egress :
+        {
+          sg_name     = sg.name
+          protocol    = rule.protocol
+          port        = rule.port
+          destination = rule.destination
+        }
+      ]
+    ]) : "${item.sg_name}-${item.destination}-${item.port}-${item.protocol}" => item
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
   security_group_id = aws_security_group.all[each.value.sg_name].id
   from_port         = each.value.port
   to_port           = each.value.port

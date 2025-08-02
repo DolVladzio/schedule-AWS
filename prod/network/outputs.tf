@@ -17,7 +17,7 @@ output "security_groups" {
   value = [
     for sg in aws_security_group.all : {
       name = sg.name
-      id = sg.id
+      id   = sg.id
     }
   ]
 }

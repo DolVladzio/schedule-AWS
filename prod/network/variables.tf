@@ -28,6 +28,11 @@ variable "security_groups" {
       port      = number
       attach_to = string
     }))
+    egress = list(object({
+      protocol    = string
+      port        = number
+      destination = string
+    }))
   }))
   description = "List of security group configurations"
 }
