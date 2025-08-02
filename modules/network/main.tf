@@ -124,3 +124,26 @@ resource "aws_security_group" "all" {
   tags = { Name = "${each.value.name}" }
 }
 ##################################################################
+resource "aws_vpc_security_group_ingress_rule" "all" {
+  for_each = {
+    for item in flatten([
+      for sg in var.security_groups : [
+        for rule in sg.ingress :
+        {
+          sg_name   = sg.name
+          protocol  = rule.protocol
+          port      = rule.port
+          attach_to = rule.attach_to
+        }
+      ]
+    ]) : "${item.sg_name}-${item.attach_to}" => item
+  }
+
+  security_group_id = aws_security_group.all[each.value.sg_name].id
+  from_port         = each.value.port
+  to_port           = each.value.port
+  ip_protocol       = each.value.protocol
+
+  referenced_security_group_id = aws_security_group.all[each.value.sg_name].id
+}
+##################################################################

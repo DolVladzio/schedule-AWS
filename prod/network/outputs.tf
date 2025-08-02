@@ -14,6 +14,11 @@ output "nat_eip_ip_list" {
 }
 ##################################################################
 output "security_groups" {
-  value = [for sg in aws_security_group.all : sg.name]
+  value = [
+    for sg in aws_security_group.all : {
+      name = sg.name
+      id = sg.id
+    }
+  ]
 }
 ##################################################################

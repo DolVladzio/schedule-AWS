@@ -32,15 +32,11 @@
 			"name": "db-sg",
 			"vpc_name": "main-vpc",
 			"description": "Bastion accessible only from cluster",
-			"attach_to": "maindb",
 			"ingress": [
 				{
-					"protocol": "tcp",
 					"port": 5432,
-					"source": {
-						"dev": "dev-k3s-sg",
-						"prod": "k3s-sg"
-					}
+					"protocol": "tcp",
+					"attach_to": "maindb"
 				}
 			],
 			"egress": [
@@ -74,12 +70,11 @@
 			"name": "bastion-sg",
 			"vpc_name": "main-vpc",
 			"description": "Allow SSH from admin IP to private network",
-			"attach_to": "bastion",
 			"ingress": [
 				{
-					"protocol": "tcp",
 					"port": 22,
-					"source": "public"
+					"protocol": "tcp",
+					"attach_to": "bastion"
 				}
 			],
 			"egress": [
