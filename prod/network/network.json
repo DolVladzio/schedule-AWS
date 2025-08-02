@@ -1,0 +1,95 @@
+{
+	"aws_region": "eu-central-1",
+
+	"vpc": [
+		{
+			"name": "main-vpc",
+			"vpc_cidr_block": "10.1.0.0/16",
+			"subnets": [
+				{
+					"name": "vpc-subnet",
+					"cidr_block": "10.1.1.0/24",
+					"public": true,
+					"zone": "a"
+				},
+				{
+					"name": "vpc-private-subnet",
+					"cidr_block": "10.1.2.0/24",
+					"public": false,
+					"zone": "a"
+				},
+				{
+					"name": "vpc-private-subnet-2",
+					"cidr_block": "10.1.3.0/24",
+					"public": false,
+					"zone": "a"
+				}
+			]
+		}
+	],
+	"security_groups": [
+		{
+			"name": "db-sg",
+			"vpc_name": "main-vpc",
+			"description": "Bastion accessible only from cluster",
+			"ingress": [
+				{
+					"port": 5432,
+					"protocol": "tcp",
+					"attach_to": "maindb"
+				}
+			],
+			"egress": [
+				{
+					"protocol": "tcp",
+					"port": 80,
+					"destination": "public"
+				},
+				{
+					"protocol": "tcp",
+					"port": 443,
+					"destination": "public"
+				},
+				{
+					"protocol": "udp",
+					"port": 53,
+					"destination": "public"
+				}
+			]
+		},			
+		{
+			"name": "bastion-sg",
+			"vpc_name": "main-vpc",
+			"description": "Allow SSH from admin IP to private network",
+			"ingress": [
+				{
+					"port": 22,
+					"protocol": "tcp",
+					"attach_to": "public"
+				}
+			],
+			"egress": [
+				{
+					"protocol": "tcp",
+					"port": 22,
+					"destination": "db-sg"
+				},
+				{
+					"protocol": "tcp",
+					"port": 80,
+					"destination": "public"
+				},
+				{
+					"protocol": "tcp",
+					"port": 443,
+					"destination": "public"
+				},
+				{
+					"protocol": "udp",
+					"port": 53,
+					"destination": "public"
+				}
+			]
+		}
+	]
+}
