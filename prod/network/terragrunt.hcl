@@ -13,6 +13,7 @@ locals {
 ##################################################################
 inputs = {
 	vpc = local.config.vpc
+	security_groups = local.config.security_groups
 	aws_region = local.config.aws_region
 }
 ##################################################################

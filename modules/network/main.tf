@@ -62,7 +62,7 @@ resource "aws_eip" "nat" {
 
   domain     = "vpc"
   depends_on = [aws_internet_gateway.gw]
-  
+
   tags = { Name = "${each.value.name}-eip" }
 }
 ##################################################################
@@ -72,7 +72,7 @@ resource "aws_nat_gateway" "nt" {
   allocation_id = aws_eip.nat[each.key].id
   subnet_id     = aws_subnet.subnets[local.first_public_subnet].id
   depends_on    = [aws_internet_gateway.gw]
-  
+
   tags = { Name = "${each.value.name}-nat-gateway" }
 }
 ##################################################################
@@ -112,5 +112,15 @@ resource "aws_route_table_association" "private" {
 
   subnet_id      = aws_subnet.subnets[each.key].id
   route_table_id = aws_route_table.private[each.value.vpc_id].id
+}
+##################################################################
+resource "aws_security_group" "all" {
+  for_each = { for sg in var.security_groups : sg.name => sg }
+
+  name        = each.value.name
+  description = each.value.description
+  vpc_id      = aws_vpc.main-vpc[each.value.vpc_name].id
+
+  tags = { Name = "${each.value.name}" }
 }
 ##################################################################

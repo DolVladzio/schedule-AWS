@@ -18,3 +18,12 @@ variable "vpc" {
   description = "List of VPC configurations"
 }
 ##################################################################
+variable "security_groups" {
+  type = list(object({
+    name        = string
+    vpc_name    = string
+    description = string
+  }))
+  description = "List of security group configurations"
+}
+##################################################################
