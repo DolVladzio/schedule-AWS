@@ -8,6 +8,7 @@ variable "vpc" {
   type = list(object({
     name           = string
     vpc_cidr_block = string
+    eip_domain     = string
     subnets = list(object({
       name       = string
       cidr_block = string

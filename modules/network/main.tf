@@ -60,7 +60,8 @@ resource "aws_internet_gateway" "gw" {
 resource "aws_eip" "nat" {
   for_each = { for k, v in local.vpcs : k => v if local.vpc_has_private_subnets[k] }
 
-  domain     = "vpc"
+  domain = each.value.eip_domain
+
   depends_on = [aws_internet_gateway.gw]
 
   tags = { Name = "${each.value.name}-eip" }

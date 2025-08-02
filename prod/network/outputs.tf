@@ -8,17 +8,20 @@ output "subnets" {
   }
 }
 ##################################################################
-# EIP ip list for a view
+# EIP ip list for a review
 output "nat_eip_ip_list" {
-  value = [for eip in aws_eip.nat : eip.public_ip]
+  value = {
+    for name, ip in aws_eip.nat :
+    "${replace(name, "-", "_")}_eip" => {
+      id  = ip.id
+      ip  = ip.public_ip
+    }
+  }
 }
 ##################################################################
 output "security_groups" {
-  value = [
-    for sg in aws_security_group.all : {
-      name = sg.name
-      id   = sg.id
-    }
-  ]
+  value = {
+    for name, sg in aws_security_group.all : name => sg.id
+  }
 }
 ##################################################################
