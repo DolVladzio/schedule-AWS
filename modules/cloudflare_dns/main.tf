@@ -7,7 +7,7 @@ locals {
       value   = var.nat_eip_ip_list[record.value].ip
       proxied = lookup(record, "proxied", true)
       ttl     = lookup(record, "ttl", 1)
-      zone_id = record.zone_id
+      zone_id = var.zone_id
     }
   ]
 }

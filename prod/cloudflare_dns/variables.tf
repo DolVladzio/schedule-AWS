@@ -6,6 +6,8 @@ variable "aws_region" {
 ##################################################################
 variable "cloudflare_api_token" {}
 ##################################################################
+variable "cloudflare_zone_id" {}
+##################################################################
 variable "dns_records_config" {
   description = "DNS records from config"
   type = list(object({
@@ -13,7 +15,6 @@ variable "dns_records_config" {
     type    = string
     proxied = bool
     value   = string
-    zone_id = string
   }))
 }
 ##################################################################
