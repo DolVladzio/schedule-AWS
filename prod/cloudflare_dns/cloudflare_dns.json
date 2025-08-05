@@ -1,0 +1,13 @@
+{
+	"aws_region": "eu-central-1",
+
+	"dns_records_config": [
+		{
+			"name": "test-dolvladzio-schedule.pp.ua",
+			"type": "A",
+			"value": "main_vpc_eip",
+			"resolve_value": true,
+			"proxied": true
+		}
+	]
+}
