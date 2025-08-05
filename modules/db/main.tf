@@ -40,6 +40,8 @@ resource "aws_db_subnet_group" "main" {
     for subnets in each.value.subnet_group_name : var.subnets[subnets].id
   ]
   tags = { Name = each.value.tags["db-subnets"] }
+
+  depends_on = [ aws_db_instance.main ]
 }
 ##################################################################
 resource "aws_db_instance" "main" {
