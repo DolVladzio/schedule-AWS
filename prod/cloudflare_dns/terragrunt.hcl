@@ -1,10 +1,10 @@
 ##################################################################
 include "root" {
-	path = find_in_parent_folders("root.hcl")
+  path = find_in_parent_folders("root.hcl")
 }
 
 terraform {
-	source = "../../modules/cloudflare_dns"
+  source = "../../modules/cloudflare_dns"
 }
 
 locals {
