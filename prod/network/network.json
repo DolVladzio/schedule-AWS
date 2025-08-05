@@ -20,10 +20,16 @@
 					"zone": "a"
 				},
 				{
-					"name": "vpc-private-subnet-2",
+					"name": "vpc-db-private-subnet-1",
 					"cidr_block": "10.1.3.0/24",
 					"public": false,
 					"zone": "a"
+				},
+				{
+					"name": "vpc-db-private-subnet-2",
+					"cidr_block": "10.1.4.0/24",
+					"public": false,
+					"zone": "b"
 				}
 			]
 		}
