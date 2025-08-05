@@ -17,6 +17,7 @@ variable "db_instances" {
     publicly_accessible   = bool
     storage_encrypted     = bool
 
+    aws_secrets_manager_name = string
     db_name  = string
     username = string
     password = string
