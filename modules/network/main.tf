@@ -133,10 +133,9 @@ resource "aws_vpc_security_group_ingress_rule" "all" {
         {
           sg_name   = sg.name
           attach_to = sg.attach_to
-
-          protocol = rule.protocol
-          port     = rule.port
-          source   = rule.source
+          protocol  = rule.protocol
+          port      = rule.port
+          source    = rule.source
         }
       ]
     ]) : "${item.sg_name}-${item.attach_to}-${item.port}" => item
@@ -162,7 +161,6 @@ resource "aws_vpc_security_group_egress_rule" "all" {
         for rule in sg.egress :
         {
           sg_name     = sg.name
-          
           protocol    = rule.protocol
           port        = rule.port
           destination = rule.destination
