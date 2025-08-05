@@ -1,10 +1,10 @@
 ##################################################################
 include "root" {
-	path = find_in_parent_folders("root.hcl")
+  path = find_in_parent_folders("root.hcl")
 }
 
 terraform {
-	source = "../../modules/vm"
+  source = "../../modules/vm"
 }
 
 locals {
@@ -15,7 +15,7 @@ dependency "network" {
   config_path = "../network"
 
   mock_outputs = {
-    subnets = {}
+    subnets         = {}
     security_groups = {}
   }
 
@@ -24,9 +24,9 @@ dependency "network" {
 ##################################################################
 inputs = merge(
   {
-    aws_region           = local.config.aws_region
-    vm_instances   		 = local.config.vm_instances
-	ssh_keys			 = local.config.ssh_keys
+    aws_region   = local.config.aws_region
+    vm_instances = local.config.vm_instances
+    ssh_keys     = local.config.ssh_keys
   },
   dependency.network.outputs
 )

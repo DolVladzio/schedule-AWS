@@ -11,14 +11,11 @@ resource "aws_instance" "vm" {
   subnet_id                   = var.subnets[each.value.subnet].id
   associate_public_ip_address = each.value.associate_public_ip_address
   monitoring                  = true
-  vpc_security_group_ids      = [
+  vpc_security_group_ids = [
     for sg_name in each.value.security_groups : var.security_groups[sg_name]
   ]
-  
-  tags = merge(
-    each.value.tags,
-    { "Name" = each.value.name }
-  )
+
+  tags = { Name = each.value.tags }
 
   user_data = templatefile("${path.root}/scripts/setup_ssh.tpl", {
     ssh_keys = join("\n", var.ssh_keys)

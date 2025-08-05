@@ -17,7 +17,7 @@ variable "vm_instances" {
     monitoring                  = bool
     key_name                    = string
     security_groups             = list(string)
-    tags                        = map(string)
+    tags                        = string
     public_key_path             = string
   }))
 
@@ -30,7 +30,7 @@ variable "security_groups" {
 ##################################################################
 variable "subnets" {
   type = map(object({
-    id = string
+    id   = string
     zone = string
   }))
 }
