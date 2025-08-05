@@ -1,0 +1,27 @@
+{
+	"aws_region": "eu-central-1",
+
+	"vm_instances": [
+	{
+		"name": "bastion",
+		"ami": "ami-02003f9f0fde924ea",
+		"instance_type": "t2.small",
+		"availability_zone": "a",
+		"subnet": "vpc-subnet",
+		"associate_public_ip_address": true,
+		"ebs_optimized": false,
+		"enable_api_termination": false,
+		"monitoring": true,
+		"key_name": "ssh-key",
+		"security_groups": [
+			"bastion-sg"
+		],
+		"tags": "bastion",
+		"public_key_path": "~/.ssh/id_rsa.pub"
+	}
+	],
+
+	"ssh_keys": [
+		"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC6A0w41fHziWMbn3xFLKtKxBhLuOTzqIwda9bm0MDZMbn3Hr7luk5v5tiAt0l4fGNJXjc4Rje3Tcwl3/3/xsJL3ifdfDRlAFsnQojgbTn0e0jHCfOg0/c3bY3UZ463d5blD+ALKiD5QxlDBKlgrDs+PjRmZbHvX+o0MUtXRq98RD4OqZwWFwreQBe+ARfMy/6tJQ8aTPLyv5pJvgYsjLPXvOw+xTz2hDCW3+O+Vv3hssp5PkIDoLD+MxgIhRNvYy2VFjekVg1oQg4eLIc6r6kJ0PuJMw8wvspuFae/RaHbHGsF1g03wQAZV6R02Wg+lWMSebruwNGP1gVb2IJAi/JaA8jdhimM1zEQLEKEoDkAsNSwudE2+erUviDqgtLfU238tcQ02n/kPkAsTDpl1gdt+OWABTL36MGgRu4WaLoYu+hFcPd+oIag+PSfUb0VKIqYSS51q7eODituC0cb3aBjAWEcozdRC4wmpG9+0rEdnYS+ySSpk8YVgYkORM1mt1FdQh9GyF3uV/7/74Lw1BQ9FRPABTureFjPX4iftPFDGst48TC0jY65LHgSv2TWRkB//3pBslpUnbGAzDMjFV1DhGjKzwxt+fYrYO+7avMgOVEiP/H2jIvOTuhQ8gFOKffIVcX8hDOkpQvo9JmjYzfF+fqqEZ8A4n/CaZOZQH2C+Q== mari-pc@MARI-PC"
+	]
+}

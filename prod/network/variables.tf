@@ -8,6 +8,7 @@ variable "vpc" {
   type = list(object({
     name           = string
     vpc_cidr_block = string
+    eip_domain     = string
     subnets = list(object({
       name       = string
       cidr_block = string
@@ -23,10 +24,11 @@ variable "security_groups" {
     name        = string
     vpc_name    = string
     description = string
+    attach_to   = string
     ingress = list(object({
-      protocol  = string
-      port      = number
-      attach_to = string
+      protocol = string
+      port     = number
+      source   = string
     }))
     egress = list(object({
       protocol    = string
