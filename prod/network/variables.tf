@@ -24,10 +24,11 @@ variable "security_groups" {
     name        = string
     vpc_name    = string
     description = string
+    attach_to   = string
     ingress = list(object({
-      protocol  = string
-      port      = number
-      attach_to = string
+      protocol = string
+      port     = number
+      source   = string
     }))
     egress = list(object({
       protocol    = string

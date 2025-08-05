@@ -1,10 +1,10 @@
 ##################################################################
 include "root" {
-	path = find_in_parent_folders("root.hcl")
+  path = find_in_parent_folders("root.hcl")
 }
 
 terraform {
-	source = "../../modules/network"
+  source = "../../modules/network"
 }
 
 locals {
@@ -12,8 +12,8 @@ locals {
 }
 ##################################################################
 inputs = {
-	vpc = local.config.vpc
-	security_groups = local.config.security_groups
-	aws_region = local.config.aws_region
+  vpc             = local.config.vpc
+  security_groups = local.config.security_groups
+  aws_region      = local.config.aws_region
 }
 ##################################################################
