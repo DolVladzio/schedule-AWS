@@ -16,7 +16,7 @@
 		"security_groups": [
 			"bastion-sg"
 		],
-		"tags": "bastion-sg",
+		"tags": "bastion",
 		"public_key_path": "~/.ssh/id_rsa.pub"
 	}
 	],
