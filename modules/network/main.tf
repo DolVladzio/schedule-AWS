@@ -60,7 +60,8 @@ resource "aws_internet_gateway" "gw" {
 resource "aws_eip" "nat" {
   for_each = { for k, v in local.vpcs : k => v if local.vpc_has_private_subnets[k] }
 
-  domain     = "vpc"
+  domain = each.value.eip_domain
+
   depends_on = [aws_internet_gateway.gw]
 
   tags = { Name = "${each.value.name}-eip" }
@@ -131,12 +132,13 @@ resource "aws_vpc_security_group_ingress_rule" "all" {
         for rule in sg.ingress :
         {
           sg_name   = sg.name
+          attach_to = sg.attach_to
           protocol  = rule.protocol
           port      = rule.port
-          attach_to = rule.attach_to
+          source    = rule.source
         }
       ]
-    ]) : "${item.sg_name}-${item.attach_to}" => item
+    ]) : "${item.sg_name}-${item.attach_to}-${item.port}" => item
   }
 
   lifecycle {
@@ -148,7 +150,8 @@ resource "aws_vpc_security_group_ingress_rule" "all" {
   to_port           = each.value.port
   ip_protocol       = each.value.protocol
 
-  referenced_security_group_id = aws_security_group.all[each.value.sg_name].id
+  referenced_security_group_id = each.value.source == "public" || each.value.source == "0.0.0.0/0" ? null : aws_security_group.all[each.value.source].id
+  cidr_ipv4                    = each.value.source == "public" || each.value.source == "0.0.0.0/0" ? "0.0.0.0/0" : null
 }
 ##################################################################
 resource "aws_vpc_security_group_egress_rule" "all" {
@@ -175,6 +178,7 @@ resource "aws_vpc_security_group_egress_rule" "all" {
   to_port           = each.value.port
   ip_protocol       = each.value.protocol
 
-  referenced_security_group_id = aws_security_group.all[each.value.sg_name].id
+  referenced_security_group_id = each.value.destination == "public" || each.value.destination == "0.0.0.0/0" ? null : aws_security_group.all[each.value.destination].id
+  cidr_ipv4                    = each.value.destination == "public" || each.value.destination == "0.0.0.0/0" ? "0.0.0.0/0" : null
 }
 ##################################################################
