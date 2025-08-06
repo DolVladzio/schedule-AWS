@@ -1,6 +1,14 @@
 {
 	"aws_region": "eu-central-1",
 
+	"secret_manager": [
+		{
+			"name": "postgresql-db-credentials",
+			"username": "postgres",
+			"password": "postgres"
+		}
+	],
+
 	"db_instances": [
 		{
 			"name": "postgresql-db",
@@ -14,11 +22,9 @@
 			"publicly_accessible": false,
 			"storage_encrypted": true,
 
-			"aws_secrets_manager_name": "postgresql-db-credentials",
 			"db_name": "maindb",
-			"username": "postgres",
-			"password": "postgres",
 			"port": 5432,
+			"secret_manager_name": "postgresql-db-credentials",
 			
 			"aws_db_subnet_group_name": "private-db-subnets",
 			"subnet_group_name": [
