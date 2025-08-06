@@ -24,12 +24,9 @@ dependency "network" {
 ##################################################################
 inputs = merge(
   {
-    aws_region            = local.config.aws_region
-    db_instances          = local.config.db_instances
-    secret_manager        = local.config.secret_manager
-    aws_backup_vault_name = local.config.aws_backup_vault_name
-    aws_backup_plan       = local.config.aws_backup_plan
-    aws_backup_selection  = local.config.aws_backup_selection
+    aws_region     = local.config.aws_region
+    db_instances   = local.config.db_instances
+    secret_manager = local.config.secret_manager
   },
   dependency.network.outputs
 )
