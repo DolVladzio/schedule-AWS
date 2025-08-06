@@ -74,5 +74,7 @@ resource "aws_db_instance" "main" {
   performance_insights_enabled = each.value.performance_insights_enabled
 
   tags = { Name = each.value.tags["db"] }
+
+  depends_on = [aws_db_subnet_group.main]
 }
 ##################################################################
