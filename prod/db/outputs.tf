@@ -10,7 +10,9 @@ output "db" {
     subnets = [
       for subnets in aws_db_subnet_group.main : subnets.subnet_ids
     ]
-    security_group_ids = db.vpc_security_group_ids
+    security_group_ids  = db.vpc_security_group_ids
+    arn                 = db.arn
+    secret_manager_name = local.db[db.identifier].secret_manager_name
     }
   }
 }

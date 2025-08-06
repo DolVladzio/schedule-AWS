@@ -4,6 +4,15 @@ variable "aws_region" {
   description = "AWS region for the provider"
 }
 ##################################################################
+variable "secret_manager" {
+  type = list(object({
+    name      = string
+    secret_id = string
+    username  = string
+    password  = string
+  }))
+}
+##################################################################
 variable "db_instances" {
   type = list(object({
     name                  = string
@@ -17,10 +26,9 @@ variable "db_instances" {
     publicly_accessible   = bool
     storage_encrypted     = bool
 
-    db_name  = string
-    username = string
-    password = string
-    port     = number
+    db_name             = string
+    port                = number
+    secret_manager_name = string
 
     aws_db_subnet_group_name = string
     subnet_group_name        = list(string)

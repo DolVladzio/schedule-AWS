@@ -24,8 +24,9 @@ dependency "network" {
 ##################################################################
 inputs = merge(
   {
-    aws_region   = local.config.aws_region
-    db_instances = local.config.db_instances
+    aws_region     = local.config.aws_region
+    db_instances   = local.config.db_instances
+    secret_manager = local.config.secret_manager
   },
   dependency.network.outputs
 )
