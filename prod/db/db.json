@@ -1,5 +1,29 @@
 {
 	"aws_region": "eu-central-1",
+	"aws_backup_vault_name": "postgres-db-backup-vault",
+
+	"aws_backup_plan": [
+		{
+			"name": "postgres-db-backup-plan",
+			"rule_name": "daily-rds-backup",
+			"target_vault_name": "postgres-db-backup-vault",
+			"schedule": "cron(0 5 * * ? *)",
+			"start_window": 60,
+			"completion_window": 180,
+			"delete_after": 7
+
+		}
+	],
+
+	"aws_backup_selection": [
+		{
+			"name": "rds-backup-selection",
+			"backup_plan_id": "postgres-db-backup-plan",
+			"resources": [
+				"postgresql-db"
+			]
+		}
+	],
 
 	"secret_manager": [
 		{
