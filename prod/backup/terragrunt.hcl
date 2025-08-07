@@ -12,10 +12,9 @@ locals {
 }
 ##################################################################
 inputs = {
-  aws_region                 = local.config.aws_region
-  aws_backup_vault_name      = local.config.aws_backup_vault_name
-  aws_backup_plan            = local.config.aws_backup_plan
-  aws_backup_selection       = local.config.aws_backup_selection
-  iam_role_policy_attachment = local.config.iam_role_policy_attachment
+  aws_region            = local.config.aws_region
+  aws_backup_vault_name = local.config.aws_backup_vault_name
+  aws_backup_plan       = local.config.aws_backup_plan
+  aws_backup_selection  = local.config.aws_backup_selection
 }
 ##################################################################
