@@ -1,0 +1,19 @@
+{
+	"aws_region": "eu-central-1",
+
+	"iam_role": [
+		{
+			"name": "aws-backup-role",
+			"version": "2012-10-17",
+			"effect": "Allow",
+			"principal_service": "backup.amazonaws.com",
+			"action": "sts:AssumeRole"
+		}
+	],
+	"iam_role_policy_attachment": [
+		{
+			"role": "aws-backup-role",
+			"policy_arn": "arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
+		}
+	]
+}
