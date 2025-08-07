@@ -15,7 +15,25 @@ dependencies {
   paths = ["../network"]
 }
 ##################################################################
-inputs = {
-  aws_region = local.config.aws_region
+dependency "network" {
+  config_path = "../network"
+
+  mock_outputs = {
+    subnets         = {}
+    security_groups = {}
+  }
+
+  mock_outputs_merge_strategy_with_state = "deep_map_only"
 }
+##################################################################
+inputs = merge(
+  {
+    aws_region                = local.config.aws_region
+    eks_cluster_role_arn      = local.config.eks_cluster_role_arn
+    eks_cluster_node_role_arn = local.config.eks_cluster_node_role_arn
+    eks_cluster               = local.config.eks_cluster
+    eks_node_group            = local.config.eks_node_group
+  },
+  dependency.network.outputs
+)
 ##################################################################
