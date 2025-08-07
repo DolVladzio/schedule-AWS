@@ -16,8 +16,7 @@ dependencies {
 }
 ##################################################################
 inputs = {
-  aws_region                 = local.config.aws_region
-  iam_role                   = local.config.iam_role
-  iam_role_policy_attachment = local.config.iam_role_policy_attachment
+  aws_region = local.config.aws_region
+  iam_role   = local.config.iam_role
 }
 ##################################################################

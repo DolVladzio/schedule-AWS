@@ -1,12 +1,17 @@
 ##################################################################
 locals {
-  iam_role_policy_attachment = {
-    for iam_role_policy in var.iam_role_policy_attachment : iam_role_policy.role => iam_role_policy
-  }
-
   iam_role = {
     for iam_role in var.iam_role : iam_role.name => iam_role
   }
+
+  flattened_attachments = flatten([
+    for item in var.iam_role : [
+      for policy in item.policy_arn : {
+        role       = item.name
+        policy_arn = policy
+      }
+    ]
+  ])
 }
 ##################################################################
 resource "aws_iam_role" "backup_role" {
@@ -29,7 +34,10 @@ resource "aws_iam_role" "backup_role" {
 }
 ##################################################################
 resource "aws_iam_role_policy_attachment" "backup_attach" {
-  for_each = local.iam_role_policy_attachment
+  for_each = {
+    for idx, val in local.flattened_attachments :
+    "${val.role}-${basename(val.policy_arn)}" => val
+  }
 
   role       = each.value.role
   policy_arn = each.value.policy_arn

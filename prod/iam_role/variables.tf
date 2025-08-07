@@ -11,15 +11,8 @@ variable "iam_role" {
     effect            = string
     principal_service = string
     action            = string
+    policy_arn        = list(string)
   }))
-  description = "AWS aim role"
-}
-##################################################################
-variable "iam_role_policy_attachment" {
-  type = list(object({
-    role       = string
-    policy_arn = string
-  }))
-  description = "AWS aim role policy attachment"
+  description = "AWS aim roles and policies"
 }
 ##################################################################

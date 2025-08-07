@@ -3,17 +3,36 @@
 
 	"iam_role": [
 		{
-			"name": "aws-backup-role",
+			"name": "awsBackupRole",
 			"version": "2012-10-17",
 			"effect": "Allow",
 			"principal_service": "backup.amazonaws.com",
-			"action": "sts:AssumeRole"
-		}
-	],
-	"iam_role_policy_attachment": [
+			"action": "sts:AssumeRole",
+			"policy_arn": [
+				"arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
+			]
+		},
 		{
-			"role": "aws-backup-role",
-			"policy_arn": "arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
+			"name": "eksClusterRole",
+			"version": "2012-10-17",
+			"effect": "Allow",
+			"principal_service": "eks.amazonaws.com",
+			"action": "sts:AssumeRole",
+			"policy_arn": [
+				"arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+			]
+		},
+		{
+			"name": "eksNodeGroupRole",
+			"version": "2012-10-17",
+			"effect": "Allow",
+			"principal_service": "ec2.amazonaws.com",
+			"action": "sts:AssumeRole",
+			"policy_arn": [
+				"arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+				"arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+				"arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+			]
 		}
 	]
 }
