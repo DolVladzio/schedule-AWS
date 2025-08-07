@@ -11,7 +11,11 @@ locals {
   config = jsondecode(file("eks.json"))
 }
 ##################################################################
+dependencies {
+  paths = ["../network"]
+}
+##################################################################
 inputs = {
-  aws_region      = local.config.aws_region
+  aws_region = local.config.aws_region
 }
 ##################################################################

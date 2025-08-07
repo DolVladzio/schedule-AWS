@@ -11,6 +11,10 @@ locals {
   config = jsondecode(file("backup.json"))
 }
 ##################################################################
+dependencies {
+  paths = ["../db"]
+}
+##################################################################
 inputs = {
   aws_region            = local.config.aws_region
   aws_backup_vault_name = local.config.aws_backup_vault_name

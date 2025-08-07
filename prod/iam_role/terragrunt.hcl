@@ -11,6 +11,10 @@ locals {
   config = jsondecode(file("iam_role.json"))
 }
 ##################################################################
+dependencies {
+  paths = ["../network"]
+}
+##################################################################
 inputs = {
   aws_region                 = local.config.aws_region
   iam_role                   = local.config.iam_role
