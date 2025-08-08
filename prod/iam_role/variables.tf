@@ -16,3 +16,12 @@ variable "iam_role" {
   description = "AWS aim roles and policies"
 }
 ##################################################################
+variable "iam_user" {
+  type = map(object({
+    user = string
+    tags = string
+    policy_arn        = list(string)
+  }))
+  description = "IAM users"
+}
+##################################################################

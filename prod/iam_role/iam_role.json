@@ -34,5 +34,15 @@
 				"arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 			]
 		}
-	]
+	],
+
+	"iam_user": {
+		"Developer": {
+			"user": "Developer",
+			"tags": "developer-iam-user",
+			"policy_arn": [
+				"arn:aws:iam::aws:policy/AdministratorAccess"
+			]
+		}
+	}
 }

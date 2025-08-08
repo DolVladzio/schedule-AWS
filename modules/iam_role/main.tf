@@ -12,6 +12,19 @@ locals {
       }
     ]
   ])
+
+  iam_user_flattened_attachments = flatten([
+    for item in var.iam_user : [
+      for policy in item.policy_arn : {
+        user       = item.user
+        policy_arn = policy
+      }
+    ]
+  ])
+
+  iam_user = {
+    for iam_user in var.iam_user : iam_user.user => iam_user
+  }
 }
 ##################################################################
 resource "aws_iam_role" "backup_role" {
@@ -43,5 +56,25 @@ resource "aws_iam_role_policy_attachment" "backup_attach" {
   policy_arn = each.value.policy_arn
 
   depends_on = [aws_iam_role.backup_role]
+}
+##################################################################
+resource "aws_iam_user" "main" {
+  for_each = local.iam_user
+
+  name = each.value.user
+
+  tags = { Name = each.value.tags }
+}
+##################################################################
+resource "aws_iam_user_policy_attachment" "main" {
+  for_each = {
+    for idx, val in local.iam_user_flattened_attachments :
+    "${val.user}-${basename(val.policy_arn)}" => val
+  }
+
+  user = each.value.user
+  policy_arn = each.value.policy_arn
+
+  depends_on = [aws_iam_user_policy_attachment.main]
 }
 ##################################################################
