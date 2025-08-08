@@ -4,21 +4,19 @@ include "root" {
 }
 
 terraform {
-  source = "../../modules/backup"
+  source = "../../modules/container_registry"
 }
 
 locals {
-  config = jsondecode(file("backup.json"))
+  config = jsondecode(file("container_registry.json"))
 }
 ##################################################################
 dependencies {
-  paths = ["../db"]
+  paths = ["../network"]
 }
 ##################################################################
 inputs = {
-  aws_region            = local.config.aws_region
-  aws_backup_vault_name = local.config.aws_backup_vault_name
-  aws_backup_plan       = local.config.aws_backup_plan
-  aws_backup_selection  = local.config.aws_backup_selection
+  aws_region         = local.config.aws_region
+  aws_ecr_repository = local.config.aws_ecr_repository
 }
 ##################################################################

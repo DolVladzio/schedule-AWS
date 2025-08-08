@@ -8,10 +8,6 @@ locals {
     for backup_selection in var.aws_backup_selection : backup_selection.name => backup_selection
   }
 
-  iam_role_policy_attachment = {
-    for iam_role in var.iam_role_policy_attachment : iam_role.role => iam_role
-  }
-
   db_names = toset(flatten([
     for sel in local.backup_selection : sel.resources
   ]))
@@ -38,32 +34,6 @@ resource "aws_backup_plan" "rds_plan" {
   }
 
   depends_on = [aws_backup_vault.rds_vault]
-}
-##################################################################
-resource "aws_iam_role" "backup_role" {
-  name = "aws-backup-role"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect = "Allow",
-        Principal = {
-          Service = "backup.amazonaws.com"
-        },
-        Action = "sts:AssumeRole"
-      }
-    ]
-  })
-}
-##################################################################
-resource "aws_iam_role_policy_attachment" "backup_attach" {
-  for_each = local.iam_role_policy_attachment
-
-  role       = each.value.role
-  policy_arn = each.value.policy_arn
-
-  depends_on = [aws_iam_role.backup_role]
 }
 ##################################################################
 data "aws_db_instance" "main" {

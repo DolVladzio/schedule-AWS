@@ -11,6 +11,10 @@ locals {
   config = jsondecode(file("cloudflare_dns.json"))
 }
 ##################################################################
+dependencies {
+  paths = ["../network"]
+}
+##################################################################
 dependency "network" {
   config_path = "../network"
 

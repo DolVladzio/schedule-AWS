@@ -1,0 +1,22 @@
+{
+	"aws_region": "eu-central-1",
+
+	"aws_ecr_repository": {
+		"frontend-repo": {
+			"name": "private-frontend-docker-image-repo",
+			"image_tag_mutability": "MUTABLE",
+			"force_delete": true,
+			"image_scanning_configuration": { "scan_on_push": true },
+			"encryption_configuration": { "encryption_type": "AES256" },
+			"tags": "docker-ecr"
+		},
+		"backend-repo": {
+			"name": "private-backend-docker-image-repo",
+			"image_tag_mutability": "MUTABLE",
+			"force_delete": true,
+			"image_scanning_configuration": { "scan_on_push": true },
+			"encryption_configuration": { "encryption_type": "AES256" },
+			"tags": "docker-ecr"
+		}
+	}
+}
