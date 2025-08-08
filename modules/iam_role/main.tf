@@ -72,7 +72,7 @@ resource "aws_iam_user_policy_attachment" "main" {
     "${val.user}-${basename(val.policy_arn)}" => val
   }
 
-  user = each.value.user
+  user       = each.value.user
   policy_arn = each.value.policy_arn
 
   depends_on = [aws_iam_user_policy_attachment.main]
