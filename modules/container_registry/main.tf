@@ -15,6 +15,7 @@ resource "aws_ecr_repository" "docker_repo" {
   }
 
   image_tag_mutability = each.value.image_tag_mutability
+  force_delete         = each.value.force_delete
 
   encryption_configuration {
     encryption_type = each.value.encryption_configuration.encryption_type

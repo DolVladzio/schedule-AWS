@@ -8,6 +8,7 @@ variable "aws_ecr_repository" {
   type = map(object({
     name                 = string
     image_tag_mutability = string
+    force_delete         = bool
     image_scanning_configuration = object({
       scan_on_push = string
     })
