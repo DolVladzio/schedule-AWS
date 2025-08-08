@@ -21,6 +21,17 @@ dependency "network" {
   mock_outputs = {
     subnets         = {}
     security_groups = {}
+    iam_users       = {}
+  }
+
+  mock_outputs_merge_strategy_with_state = "deep_map_only"
+}
+##################################################################
+dependency "iam_users" {
+  config_path = "../iam_role"
+
+  mock_outputs = {
+    iam_users = {}
   }
 
   mock_outputs_merge_strategy_with_state = "deep_map_only"
@@ -35,6 +46,7 @@ inputs = merge(
     eks_node_group            = local.config.eks_node_group
     eks_access_entry          = local.config.eks_access_entry
   },
-  dependency.network.outputs
+  dependency.network.outputs,
+  dependency.iam_users.outputs
 )
 ##################################################################

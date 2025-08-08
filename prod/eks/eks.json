@@ -39,13 +39,9 @@
 	],
 
 	"eks_access_entry": {
-		"root": {
-			"cluster_name": "main-cluster",
-  			"principal_arn": "arn:aws:iam::789279989320:root"
-		},
 		"Developer": {
 			"cluster_name": "main-cluster",
-			"principal_arn": "arn:aws:iam::789279989320:user/Developer"
+			"user_name": "Developer"
 		}
 	}
 }

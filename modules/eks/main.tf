@@ -9,7 +9,7 @@ locals {
   }
 
   eks_access_entry = {
-    for user in var.eks_access_entry : user.principal_arn => user
+    for user in var.eks_access_entry : user.user_name => user
   }
 }
 ##################################################################
@@ -72,6 +72,6 @@ resource "aws_eks_access_entry" "main" {
   for_each = local.eks_access_entry
 
   cluster_name  = each.value.cluster_name
-  principal_arn = each.value.principal_arn
+  principal_arn = var.iam_users[each.value.user_name]
 }
 ##################################################################
