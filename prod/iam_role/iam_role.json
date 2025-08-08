@@ -1,0 +1,48 @@
+{
+	"aws_region": "eu-central-1",
+
+	"iam_role": [
+		{
+			"name": "awsBackupRole",
+			"version": "2012-10-17",
+			"effect": "Allow",
+			"principal_service": "backup.amazonaws.com",
+			"action": "sts:AssumeRole",
+			"policy_arn": [
+				"arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
+			]
+		},
+		{
+			"name": "eksClusterRole",
+			"version": "2012-10-17",
+			"effect": "Allow",
+			"principal_service": "eks.amazonaws.com",
+			"action": "sts:AssumeRole",
+			"policy_arn": [
+				"arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+			]
+		},
+		{
+			"name": "eksNodeGroupRole",
+			"version": "2012-10-17",
+			"effect": "Allow",
+			"principal_service": "ec2.amazonaws.com",
+			"action": "sts:AssumeRole",
+			"policy_arn": [
+				"arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+				"arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+				"arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+			]
+		}
+	],
+
+	"iam_user": {
+		"Developer": {
+			"user": "Developer",
+			"tags": "developer-iam-user",
+			"policy_arn": [
+				"arn:aws:iam::aws:policy/AdministratorAccess"
+			]
+		}
+	}
+}

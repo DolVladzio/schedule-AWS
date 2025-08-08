@@ -11,6 +11,10 @@ locals {
   config = jsondecode(file("vm.json"))
 }
 ##################################################################
+dependencies {
+  paths = ["../network"]
+}
+##################################################################
 dependency "network" {
   config_path = "../network"
 

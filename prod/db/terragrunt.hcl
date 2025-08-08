@@ -11,6 +11,10 @@ locals {
   config = jsondecode(file("db.json"))
 }
 ##################################################################
+dependencies {
+  paths = ["../network"]
+}
+##################################################################
 dependency "network" {
   config_path = "../network"
 

@@ -31,11 +31,3 @@ variable "aws_backup_selection" {
   description = "AWS backup selection"
 }
 ##################################################################
-variable "iam_role_policy_attachment" {
-  type = list(object({
-    role       = string
-    policy_arn = string
-  }))
-  description = "AWS aim policy role"
-}
-##################################################################
