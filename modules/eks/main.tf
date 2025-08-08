@@ -7,6 +7,10 @@ locals {
   node = {
     for node in var.eks_node_group : node.node_group_name => node
   }
+
+  eks_access_entry = {
+    for user in var.eks_access_entry : user.principal_arn => user
+  }
 }
 ##################################################################
 data "aws_iam_role" "eks_cluster_role" {
@@ -62,5 +66,12 @@ resource "aws_eks_node_group" "main" {
   }
 
   depends_on = [aws_eks_cluster.main]
+}
+##################################################################
+resource "aws_eks_access_entry" "main" {
+  for_each = local.eks_access_entry
+
+  cluster_name  = each.value.cluster_name
+  principal_arn = each.value.principal_arn
 }
 ##################################################################

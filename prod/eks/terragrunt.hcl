@@ -33,6 +33,7 @@ inputs = merge(
     eks_cluster_node_role_arn = local.config.eks_cluster_node_role_arn
     eks_cluster               = local.config.eks_cluster
     eks_node_group            = local.config.eks_node_group
+    eks_access_entry          = local.config.eks_access_entry
   },
   dependency.network.outputs
 )
