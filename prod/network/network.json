@@ -14,22 +14,34 @@
 					"zone": "a"
 				},
 				{
-					"name": "vpc-private-subnet",
+					"name": "vpc-db-private-subnet-1",
 					"cidr_block": "10.1.2.0/24",
 					"public": false,
 					"zone": "a"
 				},
 				{
-					"name": "vpc-db-private-subnet-1",
+					"name": "vpc-db-private-subnet-2",
 					"cidr_block": "10.1.3.0/24",
+					"public": false,
+					"zone": "b"
+				},
+				{
+					"name": "vpc-eks-private-subnet-1",
+					"cidr_block": "10.1.4.0/24",
 					"public": false,
 					"zone": "a"
 				},
 				{
-					"name": "vpc-db-private-subnet-2",
-					"cidr_block": "10.1.4.0/24",
+					"name": "vpc-eks-private-subnet-2",
+					"cidr_block": "10.1.5.0/24",
 					"public": false,
 					"zone": "b"
+				},
+				{
+					"name": "vpc-eks-private-subnet-3",
+					"cidr_block": "10.1.6.0/24",
+					"public": false,
+					"zone": "c"
 				}
 			]
 		}

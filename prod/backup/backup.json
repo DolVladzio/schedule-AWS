@@ -23,12 +23,5 @@
 				"postgresql-db"
 			]
 		}
-	],
-
-	"iam_role_policy_attachment": [
-		{
-			"role": "aws-backup-role",
-			"policy_arn": "arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
-		}
 	]
 }
