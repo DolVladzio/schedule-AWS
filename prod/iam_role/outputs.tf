@@ -4,7 +4,7 @@ output "iam_users" {
 }
 ##################################################################
 output "backup_role_arns" {
-  value       = {
+  value = {
     for name, arn in aws_iam_role.backup_role : name => arn.arn
   }
 }
