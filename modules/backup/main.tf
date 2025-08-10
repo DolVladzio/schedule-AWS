@@ -45,7 +45,7 @@ data "aws_db_instance" "main" {
 resource "aws_backup_selection" "rds_selection" {
   for_each = local.backup_selection
 
-  iam_role_arn = aws_iam_role.backup_role.arn
+  iam_role_arn = var.backup_role_arns[each.value.aws_backup_role]
   name         = each.value.name
   plan_id      = aws_backup_plan.rds_plan[each.value.backup_plan_id].id
 

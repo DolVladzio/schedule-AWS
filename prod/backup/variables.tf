@@ -25,9 +25,15 @@ variable "aws_backup_plan" {
 variable "aws_backup_selection" {
   type = list(object({
     name           = string
+    aws_backup_role = string
     backup_plan_id = string
     resources      = list(string)
   }))
   description = "AWS backup selection"
+}
+##################################################################
+variable "backup_role_arns" {
+  type        = map(string)
+  description = "description"
 }
 ##################################################################
