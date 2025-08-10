@@ -73,5 +73,10 @@ resource "aws_eks_access_entry" "main" {
 
   cluster_name  = each.value.cluster_name
   principal_arn = var.iam_users[each.value.user_name]
+
+  depends_on = [
+    "aws_eks_cluster.main",
+    "aws_eks_node_group.main"
+  ]
 }
 ##################################################################

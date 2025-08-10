@@ -75,6 +75,6 @@ resource "aws_iam_user_policy_attachment" "main" {
   user       = each.value.user
   policy_arn = each.value.policy_arn
 
-  depends_on = [aws_iam_user_policy_attachment.main]
+  depends_on = [aws_iam_user.main]
 }
 ##################################################################

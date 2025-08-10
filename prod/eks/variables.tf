@@ -47,8 +47,8 @@ variable "eks_node_group" {
 ##################################################################
 variable "eks_access_entry" {
   type = map(object({
-    cluster_name  = string
-    user_name = string
+    cluster_name = string
+    user_name    = string
   }))
 }
 ##################################################################
