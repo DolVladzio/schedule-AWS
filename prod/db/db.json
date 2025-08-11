@@ -2,17 +2,17 @@
 	"aws_region": "eu-central-1",
 	"aws_backup_vault_name": "postgres-db-backup-vault",
 
-	"secret_manager": [
-		{
+	"secret_manager": {
+		"postgresql-db-credentials": {
 			"name": "postgresql-db-credentials",
 			"secret_id": "arn:aws:secretsmanager:eu-central-1:789279989320:secret:postgresql-db-credentials-VKzTw5",
 			"username": "postgres",
 			"password": "postgres"
 		}
-	],
+	},
 
-	"db_instances": [
-		{
+	"db_instances": {
+		"postgresql-db": {
 			"name": "postgresql-db",
 			"engine": "postgres",
 			"engine_version": "17.5",
@@ -46,5 +46,5 @@
 			"performance_insights_enabled": true,
 			"tags": { "db-subnets": "db-subnets", "db": "postgresql-db" }
 		}
-	]
+	}
 }

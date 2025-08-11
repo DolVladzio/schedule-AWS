@@ -5,7 +5,7 @@ variable "aws_region" {
 }
 ##################################################################
 variable "secret_manager" {
-  type = list(object({
+  type = map(object({
     name      = string
     secret_id = string
     username  = string
@@ -14,7 +14,7 @@ variable "secret_manager" {
 }
 ##################################################################
 variable "db_instances" {
-  type = list(object({
+  type = map(object({
     name                  = string
     engine                = string
     engine_version        = string
