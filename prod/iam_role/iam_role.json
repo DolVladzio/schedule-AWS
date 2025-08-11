@@ -1,8 +1,8 @@
 {
 	"aws_region": "eu-central-1",
 
-	"iam_role": [
-		{
+	"iam_role": {
+		"awsBackupRole": {
 			"name": "awsBackupRole",
 			"version": "2012-10-17",
 			"effect": "Allow",
@@ -12,7 +12,7 @@
 				"arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
 			]
 		},
-		{
+		"eksClusterRole": {
 			"name": "eksClusterRole",
 			"version": "2012-10-17",
 			"effect": "Allow",
@@ -22,7 +22,7 @@
 				"arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 			]
 		},
-		{
+		"eksNodeGroupRole": {
 			"name": "eksNodeGroupRole",
 			"version": "2012-10-17",
 			"effect": "Allow",
@@ -34,7 +34,7 @@
 				"arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 			]
 		}
-	],
+	},
 
 	"iam_user": {
 		"Developer": {
