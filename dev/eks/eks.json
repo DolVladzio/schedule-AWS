@@ -1,0 +1,77 @@
+{
+	"aws_region": "eu-central-1",
+	"eks_cluster_role_arn": "eksClusterRole",
+	"eks_cluster_node_role_arn": "eksNodeGroupRole",
+
+	"eks_cluster": {
+		"dev-main-cluster": {
+			"name": "dev-main-cluster",
+			"version": "1.31",
+			"authentication_mode": "API",
+			"subnet_ids": [
+				"dev-vpc-eks-private-subnet-1",
+				"dev-vpc-eks-private-subnet-2",
+				"dev-vpc-eks-private-subnet-3"
+			]
+		},
+		"test-dev-cluster" :{
+			"name": "test-dev-cluster",
+			"version": "1.31",
+			"authentication_mode": "API",
+			"subnet_ids": [
+				"dev-vpc-eks-private-subnet-1",
+				"dev-vpc-eks-private-subnet-2",
+				"dev-vpc-eks-private-subnet-3"
+			]
+		}
+	},
+	"eks_node_group": {
+		"dev-main-node": {
+			"cluster_name": "dev-main-cluster",
+			"node_group_name": "dev-main-node",
+			"subnet_ids": [
+				"dev-vpc-eks-private-subnet-1",
+				"dev-vpc-eks-private-subnet-2",
+				"dev-vpc-eks-private-subnet-3"
+			],
+			"scaling_config": {
+				"desired_size": 2,
+				"max_size": 3,
+				"min_size": 1
+			},
+			"update_config": {
+				"max_unavailable": 1
+			},
+			"instance_types": [
+				"t3.medium"
+			]
+		},
+		"test-dev-node": {
+			"cluster_name": "test-dev-cluster",
+			"node_group_name": "test-dev-node",
+			"subnet_ids": [
+				"dev-vpc-eks-private-subnet-1",
+				"dev-vpc-eks-private-subnet-2",
+				"dev-vpc-eks-private-subnet-3"
+			],
+			"scaling_config": {
+				"desired_size": 1,
+				"max_size": 2,
+				"min_size": 1
+			},
+			"update_config": {
+				"max_unavailable": 1
+			},
+			"instance_types": [
+				"t3.medium"
+			]
+		}
+	},
+
+	"eks_access_entry": {
+		"Developer": {
+			"cluster_name": "main-cluster",
+			"user_name": "Developer"
+		}
+	}
+}
