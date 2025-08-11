@@ -5,7 +5,7 @@ variable "aws_region" {
 }
 ##################################################################
 variable "vpc" {
-  type = list(object({
+  type = map(object({
     name           = string
     vpc_cidr_block = string
     eip_domain     = string
@@ -20,7 +20,7 @@ variable "vpc" {
 }
 ##################################################################
 variable "security_groups" {
-  type = list(object({
+  type = map(object({
     name        = string
     vpc_name    = string
     description = string

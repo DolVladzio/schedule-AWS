@@ -5,7 +5,7 @@ variable "aws_region" {
 }
 ##################################################################
 variable "iam_role" {
-  type = list(object({
+  type = map(object({
     name              = string
     version           = string
     effect            = string

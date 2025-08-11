@@ -10,7 +10,7 @@ variable "cloudflare_zone_id" {}
 ##################################################################
 variable "dns_records_config" {
   description = "DNS records from config"
-  type = list(object({
+  type = map(object({
     name    = string
     type    = string
     proxied = bool

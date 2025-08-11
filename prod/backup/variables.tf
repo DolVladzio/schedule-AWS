@@ -10,7 +10,7 @@ variable "aws_backup_vault_name" {
 }
 ##################################################################
 variable "aws_backup_plan" {
-  type = list(object({
+  type = map(object({
     name              = string
     rule_name         = string
     target_vault_name = string
@@ -23,7 +23,7 @@ variable "aws_backup_plan" {
 }
 ##################################################################
 variable "aws_backup_selection" {
-  type = list(object({
+  type = map(object({
     name            = string
     aws_backup_role = string
     backup_plan_id  = string

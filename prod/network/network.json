@@ -1,8 +1,8 @@
 {
 	"aws_region": "eu-central-1",
 
-	"vpc": [
-		{
+	"vpc": {
+		"vpc": {
 			"name": "main-vpc",
 			"vpc_cidr_block": "10.1.0.0/16",
 			"eip_domain": "vpc",
@@ -45,9 +45,9 @@
 				}
 			]
 		}
-	],
-	"security_groups": [
-		{
+	},
+	"security_groups": {
+		"eks-node-sg": {
 			"name": "eks-node-sg",
 			"vpc_name": "main-vpc",
 			"description": "Security group for EKS worker nodes",
@@ -91,13 +91,13 @@
 			],
 			"egress": [
 				{
-					"protocol": "-1",
+					"protocol": "0",
 					"port": 0,
 					"destination": "public"
 				}
 			]
 		},
-		{
+		"db-sg": {
 			"name": "db-sg",
 			"vpc_name": "main-vpc",
 			"attach_to": "maindb",
@@ -111,13 +111,13 @@
 			],
 			"egress": [
 				{
-					"protocol": "-1",
+					"protocol": "0",
 					"port": 0,
 					"destination": "0.0.0.0/0"
 				}
 			]
 		},
-		{
+		"bastion-sg": {
 			"name": "bastion-sg",
 			"vpc_name": "main-vpc",
 			"attach_to": "bastion",
@@ -136,11 +136,11 @@
 			],
 			"egress": [
 				{
-					"protocol": "-1",
+					"protocol": "0",
 					"port": 0,
 					"destination": "0.0.0.0/0"
 				}
 			]
 		}
-	]
+	}
 }

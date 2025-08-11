@@ -20,7 +20,7 @@ variable "eks_cluster_role_arn" {}
 variable "eks_cluster_node_role_arn" {}
 ##################################################################
 variable "eks_cluster" {
-  type = list(object({
+  type = map(object({
     name                = string
     version             = string
     authentication_mode = string
@@ -29,7 +29,7 @@ variable "eks_cluster" {
 }
 ##################################################################
 variable "eks_node_group" {
-  type = list(object({
+  type = map(object({
     cluster_name    = string
     node_group_name = string
     subnet_ids      = list(string)

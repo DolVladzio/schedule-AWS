@@ -2,8 +2,8 @@
 	"aws_region": "eu-central-1",
 	"aws_backup_vault_name": "postgres-db-backup-vault",
 
-	"aws_backup_plan": [
-		{
+	"aws_backup_plan": {
+		"postgres-db-backup-plan": {
 			"name": "postgres-db-backup-plan",
 			"rule_name": "daily-rds-backup",
 			"target_vault_name": "postgres-db-backup-vault",
@@ -13,10 +13,10 @@
 			"delete_after": 7
 
 		}
-	],
+	},
 
-	"aws_backup_selection": [
-		{
+	"aws_backup_selection": {
+		"postgres-db-backup-selection": {
 			"name": "postgres-db-backup-selection",
 			"aws_backup_role": "awsBackupRole",
 			"backup_plan_id": "postgres-db-backup-plan",
@@ -24,5 +24,5 @@
 				"postgresql-db"
 			]
 		}
-	]
+	}
 }
