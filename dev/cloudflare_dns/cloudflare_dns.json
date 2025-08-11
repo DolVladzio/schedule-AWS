@@ -1,5 +1,5 @@
 {
-	"aws_region": "eu-central-1",
+	"aws_region": "eu-west-1",
 
 	"dns_records_config": {
 		"test-dolvladzio-schedule.pp.ua": {

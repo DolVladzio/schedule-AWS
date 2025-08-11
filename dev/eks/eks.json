@@ -1,5 +1,5 @@
 {
-	"aws_region": "eu-central-1",
+	"aws_region": "eu-west-1",
 	"eks_cluster_role_arn": "eksClusterRole",
 	"eks_cluster_node_role_arn": "eksNodeGroupRole",
 
