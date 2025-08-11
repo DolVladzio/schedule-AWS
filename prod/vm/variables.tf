@@ -5,7 +5,7 @@ variable "aws_region" {
 }
 ##################################################################
 variable "vm_instances" {
-  type = list(object({
+  type = map(object({
     name                        = string
     ami                         = string
     instance_type               = string
