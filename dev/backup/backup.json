@@ -1,0 +1,28 @@
+{
+	"aws_region": "eu-west-1",
+	"aws_backup_vault_name": "dev-postgres-db-backup-vault",
+
+	"aws_backup_plan": {
+		"dev-postgres-db-backup-plan": {
+			"name": "dev-postgres-db-backup-plan",
+			"rule_name": "dev-daily-rds-backup",
+			"target_vault_name": "dev-postgres-db-backup-vault",
+			"schedule": "cron(0 * * * ? *)",
+			"start_window": 60,
+			"completion_window": 180,
+			"delete_after": 7
+
+		}
+	},
+
+	"aws_backup_selection": {
+		"dev-postgres-db-backup-selection": {
+			"name": "dev-postgres-db-backup-selection",
+			"aws_backup_role": "dev-awsBackupRole",
+			"backup_plan_id": "dev-postgres-db-backup-plan",
+			"resources": [
+				"dev-postgresql-db"
+			]
+		}
+	}
+}

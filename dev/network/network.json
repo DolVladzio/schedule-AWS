@@ -1,0 +1,146 @@
+{
+	"aws_region": "eu-west-1",
+
+	"vpc": {
+		"dev-vpc": {
+			"name": "dev-main-vpc",
+			"vpc_cidr_block": "10.1.0.0/16",
+			"eip_domain": "vpc",
+			"subnets": [
+				{
+					"name": "dev-vpc-subnet",
+					"cidr_block": "10.1.1.0/24",
+					"public": true,
+					"zone": "a"
+				},
+				{
+					"name": "dev-vpc-db-private-subnet-1",
+					"cidr_block": "10.1.2.0/24",
+					"public": false,
+					"zone": "a"
+				},
+				{
+					"name": "dev-vpc-db-private-subnet-2",
+					"cidr_block": "10.1.3.0/24",
+					"public": false,
+					"zone": "b"
+				},
+				{
+					"name": "dev-vpc-eks-private-subnet-1",
+					"cidr_block": "10.1.4.0/24",
+					"public": false,
+					"zone": "a"
+				},
+				{
+					"name": "dev-vpc-eks-private-subnet-2",
+					"cidr_block": "10.1.5.0/24",
+					"public": false,
+					"zone": "b"
+				},
+				{
+					"name": "dev-vpc-eks-private-subnet-3",
+					"cidr_block": "10.1.6.0/24",
+					"public": false,
+					"zone": "c"
+				}
+			]
+		}
+	},
+	"security_groups": {
+		"dev-eks-node-sg": {
+			"name": "dev-eks-node-sg",
+			"vpc_name": "dev-main-vpc",
+			"description": "Security group for EKS worker nodes",
+			"attach_to": "dev-eks-node",
+			"ingress": [
+				{
+					"protocol": "tcp",
+					"port": 22,
+					"source": "public"
+				},
+				{
+					"protocol": "tcp",
+					"port": 443,
+					"source": "dev-eks-node-sg"
+				},
+				{
+					"protocol": "tcp",
+					"port": 10250,
+					"source": "dev-eks-node-sg"
+				},
+				{
+					"protocol": "udp",
+					"port": 8472,
+					"source": "dev-eks-node-sg"
+				},
+				{
+					"protocol": "tcp",
+					"port": 30000,
+					"source": "public"
+				},
+				{
+					"protocol": "tcp",
+					"port": 32767,
+					"source": "public"
+				},
+				{
+					"protocol": "tcp",
+					"port": 5432,
+					"source": "dev-db-sg"
+				}
+			],
+			"egress": [
+				{
+					"protocol": "0",
+					"port": 0,
+					"destination": "public"
+				}
+			]
+		},
+		"dev-db-sg": {
+			"name": "dev-db-sg",
+			"vpc_name": "dev-main-vpc",
+			"attach_to": "dev-maindb",
+			"description": "Security group for PostgreSQL database",
+			"ingress": [
+				{
+					"protocol": "tcp",
+					"port": 5432,
+					"source": "dev-bastion-sg"
+				}
+			],
+			"egress": [
+				{
+					"protocol": "0",
+					"port": 0,
+					"destination": "0.0.0.0/0"
+				}
+			]
+		},
+		"dev-bastion-sg": {
+			"name": "dev-bastion-sg",
+			"vpc_name": "dev-main-vpc",
+			"attach_to": "dev-bastion",
+			"description": "Security group for Bastion VM",
+			"ingress": [
+				{
+					"protocol": "tcp",
+					"port": 22,
+					"source": "0.0.0.0/0"
+				},
+				{
+					"protocol": "tcp",
+					"port": 80,
+					"source": "0.0.0.0/0"
+				}
+			],
+			"egress": [
+				{
+					"protocol": "0",
+					"port": 0,
+					"destination": "0.0.0.0/0"
+				}
+			]
+		}
+	}
+}
