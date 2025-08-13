@@ -1,4 +1,4 @@
-name: "Dev: Terragrunt Deploy"
+name: "Dev: Terragrunt Infra Deploy"
 
 on:
   workflow_dispatch:
