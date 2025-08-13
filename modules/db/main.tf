@@ -52,7 +52,7 @@ resource "aws_db_instance" "main" {
   publicly_accessible   = each.value.publicly_accessible
   storage_encrypted     = each.value.storage_encrypted
 
-  db_name  = each.value.db_name
+  db_name  = replace(each.value.db_name, "/[^a-zA-Z0-9]/", "")
   username = local.db_credentials[each.value.secret_manager_name].username
   password = local.db_credentials[each.value.secret_manager_name].password
   port     = each.value.port
