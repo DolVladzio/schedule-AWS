@@ -45,5 +45,5 @@ jobs:
         run: |
           terragrunt apply \
             --all \
-            --terragrunt-working-dir dev \
+            --working-dir=dev \
             --auto-approve
