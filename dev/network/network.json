@@ -96,7 +96,7 @@
 			"egress": [
 				{
 					"protocol": "0",
-					"port": 0,
+					"port": -1,
 					"destination": "public"
 				}
 			]
@@ -116,7 +116,7 @@
 			"egress": [
 				{
 					"protocol": "0",
-					"port": 0,
+					"port": -1,
 					"destination": "0.0.0.0/0"
 				}
 			]
@@ -141,7 +141,7 @@
 			"egress": [
 				{
 					"protocol": "0",
-					"port": 0,
+					"port": -1,
 					"destination": "0.0.0.0/0"
 				}
 			]
