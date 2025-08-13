@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches: [ dev ]
-    paths:
-      - 'dev/**'
-      - 'modules/**'
+    # paths:
+    #   - 'dev/**'
+    #   - 'modules/**'
 
 jobs:
   terragrunt:
