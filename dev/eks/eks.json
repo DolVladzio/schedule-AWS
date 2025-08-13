@@ -70,7 +70,7 @@
 
 	"eks_access_entry": {
 		"dev-Developer": {
-			"cluster_name": "main-cluster",
+			"cluster_name": "dev-main-cluster",
 			"user_name": "dev-Developer"
 		}
 	}
