@@ -1,7 +1,7 @@
 {
 	"aws_region": "eu-west-1",
-	"eks_cluster_role_arn": "eksClusterRole",
-	"eks_cluster_node_role_arn": "eksNodeGroupRole",
+	"eks_cluster_role_arn": "dev-eksClusterRole",
+	"eks_cluster_node_role_arn": "dev-eksNodeGroupRole",
 
 	"eks_cluster": {
 		"dev-main-cluster": {
@@ -43,7 +43,7 @@
 				"max_unavailable": 1
 			},
 			"instance_types": [
-				"t3.medium"
+				"t4g.small"
 			]
 		},
 		"test-dev-node": {
@@ -63,15 +63,15 @@
 				"max_unavailable": 1
 			},
 			"instance_types": [
-				"t3.medium"
+				"t4g.small"
 			]
 		}
 	},
 
 	"eks_access_entry": {
-		"Developer": {
+		"dev-Developer": {
 			"cluster_name": "main-cluster",
-			"user_name": "Developer"
+			"user_name": "dev-Developer"
 		}
 	}
 }
