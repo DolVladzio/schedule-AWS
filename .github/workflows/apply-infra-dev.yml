@@ -1,6 +1,7 @@
 name: "Dev: Terragrunt Deploy"
 
 on:
+  workflow_dispatch:
   push:
     branches: [ dev ]
     paths:
