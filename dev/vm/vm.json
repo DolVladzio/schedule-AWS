@@ -4,8 +4,8 @@
 	"vm_instances": {
 		"dev-bastion": {
 			"name": "dev-bastion",
-			"ami": "ami-02003f9f0fde924ea",
-			"instance_type": "t2.small",
+			"ami": "ami-01f23391a59163da9",
+			"instance_type": "t2.micro",
 			"availability_zone": "a",
 			"subnet": "dev-vpc-subnet",
 			"associate_public_ip_address": true,

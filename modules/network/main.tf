@@ -58,19 +58,32 @@ resource "aws_internet_gateway" "gw" {
 }
 ##################################################################
 resource "aws_eip" "nat" {
-  for_each = { for k, v in local.vpcs : k => v if local.vpc_has_private_subnets[k] }
+  for_each = {
+    for pair in flatten([
+      for vpc_key, vpc_data in local.vpcs : [
+        for eip_name in vpc_data.eips : {
+          key     = "${vpc_key}-${eip_name}"
+          domain  = vpc_data.eip_domain
+          name    = eip_name
+          has_pub = local.vpc_has_public_subnets[vpc_key]
+        }
+      ]
+    ]) : pair.key => pair
+    if pair.has_pub
+  }
 
-  domain = each.value.eip_domain
-
+  domain     = each.value.domain
   depends_on = [aws_internet_gateway.gw]
 
-  tags = { Name = "${each.value.name}-eip" }
+  tags = {
+    Name = each.value.name
+  }
 }
 ##################################################################
 resource "aws_nat_gateway" "nt" {
   for_each = { for k, v in local.vpcs : k => v if local.vpc_has_private_subnets[k] }
 
-  allocation_id = aws_eip.nat[each.key].id
+  allocation_id = aws_eip.nat["${each.key}-${each.value.eips[0]}"].id
   subnet_id     = aws_subnet.subnets[local.first_public_subnet].id
   depends_on    = [aws_internet_gateway.gw]
 

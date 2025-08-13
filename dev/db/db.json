@@ -5,7 +5,7 @@
 	"secret_manager": {
 		"dev-postgresql-db-credentials": {
 			"name": "dev-postgresql-db-credentials",
-			"secret_id": "arn:aws:secretsmanager:eu-central-1:789279989320:secret:postgresql-db-credentials-VKzTw5",
+			"secret_id": "arn:aws:secretsmanager:eu-west-1:789279989320:secret:dev-postgresql-db-credentials-TxUFwg",
 			"username": "postgres",
 			"password": "postgres"
 		}

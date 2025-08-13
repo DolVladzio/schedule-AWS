@@ -6,6 +6,10 @@
 			"name": "main-vpc",
 			"vpc_cidr_block": "10.1.0.0/16",
 			"eip_domain": "vpc",
+			"eips": [
+				"dev-vpc-eip",
+				"main-vpc-eip"
+			],
 			"subnets": [
 				{
 					"name": "vpc-subnet",
@@ -92,7 +96,7 @@
 			"egress": [
 				{
 					"protocol": "0",
-					"port": 0,
+					"port": -1,
 					"destination": "public"
 				}
 			]
@@ -112,7 +116,7 @@
 			"egress": [
 				{
 					"protocol": "0",
-					"port": 0,
+					"port": -1,
 					"destination": "0.0.0.0/0"
 				}
 			]
@@ -137,7 +141,7 @@
 			"egress": [
 				{
 					"protocol": "0",
-					"port": 0,
+					"port": -1,
 					"destination": "0.0.0.0/0"
 				}
 			]
