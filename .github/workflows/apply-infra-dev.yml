@@ -43,5 +43,6 @@ jobs:
 
       - name: Run Terragrunt
         run: |
-          cd dev
-          terragrunt apply --all --auto-approve
+          terragrunt run-all apply \
+            --terragrunt-working-dir dev \
+            --auto-approve
