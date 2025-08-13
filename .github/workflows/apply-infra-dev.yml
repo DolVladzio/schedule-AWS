@@ -15,7 +15,7 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      TG_VERSION: 0.83.2
+      TG_VERSION: 0.84.1
       TF_IN_AUTOMATION: true
 
     steps:
