@@ -26,6 +26,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.12.2
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: Install Terragrunt
         run: |
@@ -45,6 +46,6 @@ jobs:
         run: |
           terragrunt apply \
             --all \
-            --working-dir=dev \
+            --auto-approve \
             --non-interactive \
-            --auto-approve
+            --working-dir=dev
