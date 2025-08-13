@@ -6,6 +6,10 @@
 			"name": "main-vpc",
 			"vpc_cidr_block": "10.1.0.0/16",
 			"eip_domain": "vpc",
+			"eips": [
+				"dev-vpc-eip",
+				"main-vpc-eip"
+			],
 			"subnets": [
 				{
 					"name": "vpc-subnet",
