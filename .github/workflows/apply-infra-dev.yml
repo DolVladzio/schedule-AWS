@@ -2,8 +2,8 @@ name: "Dev: Terragrunt Infra Deploy"
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches: [ dev ]
+  push:
+    branches: [ dev ]
   # paths:
   #   - 'dev/**'
   #   - 'modules/**'
@@ -48,4 +48,4 @@ jobs:
             --all \
             --auto-approve \
             --non-interactive \
-            --working-dir=dev
+            --working-dir=dev/network
