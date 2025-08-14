@@ -15,7 +15,7 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      TG_VERSION: 0.80.0
+      TG_VERSION: 0.74.0
       TF_IN_AUTOMATION: true
 
     steps:
@@ -25,7 +25,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 1.12.2
+          terraform_version: 1.10.0
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: Install Terragrunt
@@ -48,4 +48,4 @@ jobs:
             --all \
             --auto-approve \
             --non-interactive \
-            --working-dir=dev/iam_role
+            --working-dir=dev
