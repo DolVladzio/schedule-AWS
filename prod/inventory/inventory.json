@@ -1,0 +1,7 @@
+{
+	"aws_region": "eu-central-1",
+
+	"vms_config": [
+		"bastion"
+	]
+}
