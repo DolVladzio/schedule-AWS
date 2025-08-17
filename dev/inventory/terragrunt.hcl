@@ -1,0 +1,52 @@
+##################################################################
+include "root" {
+  path = find_in_parent_folders("root.hcl")
+}
+
+terraform {
+  source = "../../modules/inventory"
+}
+
+locals {
+  config = jsondecode(file("inventory.json"))
+}
+##################################################################
+dependencies {
+  paths = ["../network", "../db", "../vm"]
+}
+##################################################################
+dependency "network" {
+  config_path = "../network"
+
+  mock_outputs = {
+    nat_eip_ip_list = {}
+  }
+
+  mock_outputs_merge_strategy_with_state = "deep_map_only"
+}
+##################################################################
+dependency "vm" {
+  config_path = "../vm"
+
+  mock_outputs = {
+    vms = {}
+  }
+
+  mock_outputs_merge_strategy_with_state = "deep_map_only"
+}
+##################################################################
+inputs = merge(
+  {
+    aws_region         = local.config.aws_region
+    vms_config         = local.config.vms_config
+    dbs_config         = local.config.dbs_config
+    db_secret_managers = local.config.db_secret_managers
+    load_balancers     = local.config.load_balancers
+    inventory_bucket   = local.config.inventory_bucket
+    inventory_tpl_path = "${get_repo_root()}/inventory.tpl"
+    inventory_ini_path = "${get_repo_root()}/ansible/inventory/inventory.ini"
+  },
+  dependency.network.outputs,
+  dependency.vm.outputs,
+)
+##################################################################
