@@ -5,6 +5,7 @@ output "vms" {
     ami    = vm.ami
     subnet = vm.subnet_id
     sg     = vm.vpc_security_group_ids
+    ip     = vm.public_ip
     }
   }
 }
