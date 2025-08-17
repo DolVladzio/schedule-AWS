@@ -12,3 +12,8 @@ ${vm_name} ansible_host=${vm_ip}
 %{ for name, db in db_info ~}
 ${name} ansible_host=${db.db_host} db_name=${db.db_name} db_user=${db.db_user} db_password=${db.db_password}
 %{ endfor ~}
+
+[load_balancers]
+%{ for name, ip in lb_ips ~}
+${name}=${ip}
+%{ endfor ~}

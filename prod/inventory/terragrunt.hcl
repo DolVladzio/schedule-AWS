@@ -41,6 +41,7 @@ inputs = merge(
     vms_config         = local.config.vms_config
     dbs_config         = local.config.dbs_config
     db_secret_managers = local.config.db_secret_managers
+    load_balancers     = local.config.load_balancers
     inventory_tpl_path = "${get_repo_root()}/inventory.tpl"
     inventory_ini_path = "${get_repo_root()}/ansible/inventory/inventory.ini"
   },

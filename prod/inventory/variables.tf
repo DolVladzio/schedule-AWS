@@ -19,6 +19,10 @@ variable "dbs_config" {
   type = list(string)
 }
 ##################################################################
+variable "load_balancers" {
+  type = list(string)
+}
+##################################################################
 variable "inventory_tpl_path" {}
 ##################################################################
 variable "inventory_ini_path" {}

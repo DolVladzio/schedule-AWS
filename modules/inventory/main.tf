@@ -36,6 +36,10 @@ locals {
         db_password = local.db_credentials[db_name].password
       }
     }
+
+    lb_ips = {
+      for lb_name in var.load_balancers : lb_name => var.nat_eip_ip_list[lb_name].ip
+    }
   })
 }
 ##################################################################

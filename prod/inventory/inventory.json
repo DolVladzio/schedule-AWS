@@ -14,5 +14,10 @@
 			"db_name": "postgresql-db",
 			"secret_manager": "postgresql-db-credentials"
 		}
-	}
+	},
+
+	"load_balancers": [
+		"main_vpc_main_vpc_eip",
+		"main_vpc_dev_vpc_eip"
+	]
 }
