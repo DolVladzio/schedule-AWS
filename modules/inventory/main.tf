@@ -10,7 +10,7 @@ data "aws_secretsmanager_secret" "db_secret" {
 
   name = each.value.secret_manager
 }
-##################################################################
+
 data "aws_secretsmanager_secret_version" "db_secret_version" {
   for_each = data.aws_secretsmanager_secret.db_secret
 
@@ -46,5 +46,23 @@ locals {
 resource "local_file" "ansible_inventory" {
   content  = local.inventory
   filename = var.inventory_ini_path
+}
+##################################################################
+resource "aws_s3_bucket" "main" {
+  for_each = var.inventory_bucket
+
+  bucket = each.value.bucket_name
+  force_destroy = each.value.force_destroy
+}
+
+resource "aws_s3_bucket_object" "my_object" {
+  for_each = var.inventory_bucket
+
+  bucket = aws_s3_bucket.main[each.value.bucket_name].id
+  key    = each.value.bucket_key_value
+  source = var.inventory_ini_path
+  etag   = filemd5(var.inventory_ini_path)
+
+  depends_on = [aws_s3_bucket.main]
 }
 ##################################################################
