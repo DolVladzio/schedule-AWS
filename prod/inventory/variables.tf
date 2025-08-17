@@ -15,9 +15,20 @@ variable "vms_config" {
   type = list(string)
 }
 ##################################################################
+variable "dbs_config" {
+  type = list(string)
+}
+##################################################################
 variable "inventory_tpl_path" {}
 ##################################################################
 variable "inventory_ini_path" {}
+##################################################################
+variable "db_secret_managers" {
+  type = map(object({
+    db_name = string
+    secret_manager = string
+  }))
+}
 ##################################################################
 variable "vms" {
   type = map(object({
@@ -27,18 +38,4 @@ variable "vms" {
     subnet = string
   }))
 }
-##################################################################
-# variable "db" {
-#   type = map(object({
-#     arn                  = string
-#     db_subnet_group_name = string
-#     engine               = string
-#     engine_version       = string
-#     instance_class       = string
-#     secret_manager_name  = string
-#     security_group_ids   = list(string)
-#     storage_type         = string
-#     subnets              = list(string)
-#   }))
-# }
 ##################################################################

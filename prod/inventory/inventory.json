@@ -3,5 +3,16 @@
 
 	"vms_config": [
 		"bastion"
-	]
+	],
+
+	"dbs_config": [
+		"postgresql-db"
+	],
+
+	"db_secret_managers": {
+		"postgresql-db": {
+			"db_name": "postgresql-db",
+			"secret_manager": "postgresql-db-credentials"
+		}
+	}
 }

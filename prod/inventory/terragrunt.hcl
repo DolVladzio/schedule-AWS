@@ -35,25 +35,16 @@ dependency "vm" {
   mock_outputs_merge_strategy_with_state = "deep_map_only"
 }
 ##################################################################
-dependency "db" {
-  config_path = "../db"
-
-  mock_outputs = {
-    db = {}
-  }
-
-  mock_outputs_merge_strategy_with_state = "deep_map_only"
-}
-##################################################################
 inputs = merge(
   {
     aws_region         = local.config.aws_region
     vms_config         = local.config.vms_config
+    dbs_config         = local.config.dbs_config
+    db_secret_managers = local.config.db_secret_managers
     inventory_tpl_path = "${get_repo_root()}/inventory.tpl"
     inventory_ini_path = "${get_repo_root()}/ansible/inventory/inventory.ini"
   },
   dependency.network.outputs,
   dependency.vm.outputs,
-  dependency.db.outputs
 )
 ##################################################################
