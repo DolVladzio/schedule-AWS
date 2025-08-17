@@ -5,14 +5,14 @@
 		"dolvladzio-schedule.pp.ua": {
 			"name": "dolvladzio-schedule.pp.ua",
 			"type": "A",
-			"value": "main_vpc_eip",
+			"value": "main_vpc_main_vpc_eip",
 			"resolve_value": true,
 			"proxied": true
 		},
 		"dolvladzio-schedule-dev.pp.ua": {
 			"name": "dolvladzio-schedule-dev.pp.ua",
 			"type": "A",
-			"value": "main_vpc_eip",
+			"value": "main_vpc_dev_vpc_eip",
 			"resolve_value": true,
 			"proxied": true
 		}

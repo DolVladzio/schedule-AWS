@@ -1,0 +1,31 @@
+{
+	"aws_region": "eu-central-1",
+
+	"vms_config": [
+		"bastion"
+	],
+
+	"dbs_config": [
+		"postgresql-db"
+	],
+
+	"db_secret_managers": {
+		"postgresql-db": {
+			"db_name": "postgresql-db",
+			"secret_manager": "postgresql-db-credentials"
+		}
+	},
+
+	"load_balancers": [
+		"main_vpc_main_vpc_eip",
+		"main_vpc_dev_vpc_eip"
+	],
+
+	"inventory_bucket": {
+		"ansible-inventory-ini-bucket": {
+			"bucket_name": "ansible-inventory-ini-bucket",
+			"bucket_key_value": "./inventory/inventory.ini",
+			"force_destroy": true
+		}
+	}
+}
