@@ -17,12 +17,25 @@ The stack includes:
 ## 📂 Repository Structure
 ```
 ├── README.md
+├── ansible
+│   └── inventory
+├── dev
+│   ├── backup
+│   ├── cloudflare_dns
+│   ├── db
+│   ├── eks
+│   ├── iam_role
+│   ├── inventory
+│   ├── network
+│   └── vm
+├── inventory.tpl
 ├── modules
 │   ├── backup
 │   ├── cloudflare_dns
 │   ├── db
 │   ├── eks
 │   ├── iam_role
+│   ├── inventory
 │   ├── network
 │   └── vm
 ├── prod
@@ -31,6 +44,7 @@ The stack includes:
 │   ├── db
 │   ├── eks
 │   ├── iam_role
+│   ├── inventory
 │   ├── network
 │   └── vm
 └── root.hcl
