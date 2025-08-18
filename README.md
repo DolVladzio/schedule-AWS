@@ -9,6 +9,7 @@ The stack includes:
 - **db** – Database infrastructure(PostgreSQL)
 - **eks** – Amazon EKS clusters and related resources  
 - **iam_role** – IAM roles and policies for service access  
+- **inventory** - Generating the inventory.ini and store in the Bucket
 - **network** – VPC, subnets, routing, and networking components  
 - **vm** – EC2 virtual machines and related configurations  
 
