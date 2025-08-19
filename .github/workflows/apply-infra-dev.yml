@@ -10,15 +10,15 @@ jobs:
   terragrunt:
     runs-on: ubuntu-latest
 
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      TG_VERSION: 0.56.3
-      TF_IN_AUTOMATION: true
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4.3.1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
