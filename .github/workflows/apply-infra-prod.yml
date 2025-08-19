@@ -42,7 +42,7 @@ jobs:
 
       - name: "Run Terragrunt: Dev"
         run: |
-          terragrunt apply \
+          terragrunt destroy \
             --all \
             --auto-approve \
             --non-interactive \
