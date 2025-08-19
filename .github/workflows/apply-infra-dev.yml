@@ -46,4 +46,4 @@ jobs:
             --all \
             --auto-approve \
             --non-interactive \
-            --working-dir=dev
+            --working-dir=dev/iam_role
