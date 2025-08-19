@@ -17,8 +17,8 @@
 	},
 
 	"load_balancers": [
-		"test-main_vpc_main_vpc_eip",
-		"test-main_vpc_dev_vpc_eip"
+		"test_main_vpc_main_vpc_eip",
+		"test_main_vpc_dev_vpc_eip"
 	],
 
 	"inventory_bucket": {
