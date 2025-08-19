@@ -51,7 +51,7 @@ resource "local_file" "ansible_inventory" {
 resource "aws_s3_bucket" "main" {
   for_each = var.inventory_bucket
 
-  bucket = each.value.bucket_name
+  bucket        = each.value.bucket_name
   force_destroy = each.value.force_destroy
 }
 ##################################################################

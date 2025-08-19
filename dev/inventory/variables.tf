@@ -29,16 +29,16 @@ variable "inventory_ini_path" {}
 ##################################################################
 variable "db_secret_managers" {
   type = map(object({
-    db_name = string
+    db_name        = string
     secret_manager = string
   }))
 }
 ##################################################################
 variable "inventory_bucket" {
   type = map(object({
-    bucket_name = string
+    bucket_name      = string
     bucket_key_value = string
-    force_destroy = bool
+    force_destroy    = bool
   }))
 }
 ##################################################################
