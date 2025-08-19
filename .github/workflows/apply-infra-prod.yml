@@ -42,7 +42,7 @@ jobs:
 
       - name: "Run Terragrunt: Prod"
         run: |
-          terragrunt destroy \
+          terragrunt apply \
             --all \
             --auto-approve \
             --non-interactive \
