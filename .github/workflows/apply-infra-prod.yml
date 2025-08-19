@@ -2,23 +2,24 @@ name: "Prod: Terragrunt Infra Deploy"
 
 on:
   workflow_dispatch:
-  # paths:
-  #   - 'main/**'
-  #   - 'modules/**'
+  push:
+    paths:
+      - 'main/**'
 
 jobs:
   terragrunt:
     runs-on: ubuntu-latest
 
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      TG_VERSION: 0.56.3
-      TF_IN_AUTOMATION: true
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4.3.1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
@@ -26,21 +27,20 @@ jobs:
           terraform_version: 1.5.7
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      - name: Install Terragrunt
-        run: |
-          wget https://github.com/gruntwork-io/terragrunt/releases/download/v${TG_VERSION}/terragrunt_linux_amd64
-          chmod +x terragrunt_linux_amd64
-          sudo mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
-          terragrunt --version
+      - name: Install Terragrunt and OpenTofu
+        uses: gruntwork-io/terragrunt-action@v3
+        with:
+          tg_version: '0.82.2'
+          tofu_version: '1.10.1'
 
       - name: Set necessary envs
         run: |
-          echo "AWS_REGION={{ secrets.AWS_REGION }}" >> $GITHUB_ENV
-          echo "BUCKET_NAME={{ secrets.BUCKET_NAME }}" >> $GITHUB_ENV
-          echo "CLOUDFLARE_API_TOKEN={{ secrets.CLOUDFLARE_API_TOKEN }}" >> $GITHUB_ENV
-          echo "CLOUDFLARE_ZONE_ID={{ secrets.CLOUDFLARE_ZONE_ID }}" >> $GITHUB_ENV
+          echo "AWS_REGION=${{ secrets.AWS_REGION }}" >> $GITHUB_ENV
+          echo "BUCKET_NAME=${{ secrets.BUCKET_NAME }}" >> $GITHUB_ENV
+          echo "CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }}" >> $GITHUB_ENV
+          echo "CLOUDFLARE_ZONE_ID=${{ secrets.CLOUDFLARE_ZONE_ID }}" >> $GITHUB_ENV
 
-      - name: "Run Terragrunt: Prod"
+      - name: "Run Terragrunt: Dev"
         run: |
           terragrunt apply \
             --all \

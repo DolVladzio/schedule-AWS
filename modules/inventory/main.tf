@@ -51,18 +51,20 @@ resource "local_file" "ansible_inventory" {
 resource "aws_s3_bucket" "main" {
   for_each = var.inventory_bucket
 
-  bucket = each.value.bucket_name
+  bucket        = each.value.bucket_name
   force_destroy = each.value.force_destroy
 }
-
-resource "aws_s3_bucket_object" "my_object" {
+##################################################################
+resource "aws_s3_object" "object" {
   for_each = var.inventory_bucket
 
   bucket = aws_s3_bucket.main[each.value.bucket_name].id
   key    = each.value.bucket_key_value
   source = var.inventory_ini_path
-  etag   = filemd5(var.inventory_ini_path)
 
-  depends_on = [aws_s3_bucket.main]
+  depends_on = [
+    "aws_s3_bucket.main",
+    "local_file.ansible_inventory"
+  ]
 }
 ##################################################################
