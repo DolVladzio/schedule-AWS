@@ -1,5 +1,9 @@
 # Infra AWS Terraform/Terragrunt
 
+Dev - [![Dev: Terragrunt Infra Deploy](https://github.com/DolVladzio/schedule-AWS/actions/workflows/apply-infra-dev.yml/badge.svg?branch=dev)](https://github.com/DolVladzio/schedule-AWS/actions/workflows/apply-infra-dev.yml)
+
+Prod - [![Prod: Terragrunt Infra Deploy](https://github.com/DolVladzio/schedule-AWS/actions/workflows/apply-infra-prod.yml/badge.svg?branch=main)](https://github.com/DolVladzio/schedule-AWS/actions/workflows/apply-infra-prod.yml)
+
 This repository contains the **infrastructure-as-code** setup for deploying and managing services in AWS and Cloudflare using **Terraform** with **Terragrunt**.
 
 The stack includes:
