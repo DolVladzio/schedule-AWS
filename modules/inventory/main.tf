@@ -63,6 +63,9 @@ resource "aws_s3_bucket_object" "my_object" {
   source = var.inventory_ini_path
   etag   = filemd5(var.inventory_ini_path)
 
-  depends_on = [aws_s3_bucket.main]
+  depends_on = [
+    "aws_s3_bucket.main",
+    "local_file.ansible_inventory"
+  ]
 }
 ##################################################################
