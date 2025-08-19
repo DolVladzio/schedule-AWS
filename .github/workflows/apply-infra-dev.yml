@@ -42,8 +42,11 @@ jobs:
 
       - name: "Run Terragrunt: Dev"
         run: |
-          terragrunt apply \
-            --all \
-            --auto-approve \
-            --non-interactive \
-            --working-dir=dev
+          cd dev/iam_role
+          terragrunt show-config
+
+          # terragrunt apply \
+          #   --all \
+          #   --auto-approve \
+          #   --non-interactive \
+          #   --working-dir=dev
