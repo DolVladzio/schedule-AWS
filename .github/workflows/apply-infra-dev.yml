@@ -2,9 +2,9 @@ name: "Dev: Terragrunt Infra Deploy"
 
 on:
   workflow_dispatch:
-  # paths:
-  #   - 'dev/**'
-  #   - 'modules/**'
+  paths:
+    - 'dev/**'
+    - 'modules/**'
 
 jobs:
   terragrunt:
@@ -26,12 +26,11 @@ jobs:
           terraform_version: 1.5.7
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      - name: Install Terragrunt
-        run: |
-          wget https://github.com/gruntwork-io/terragrunt/releases/download/v${TG_VERSION}/terragrunt_linux_amd64
-          chmod +x terragrunt_linux_amd64
-          sudo mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
-          terragrunt --version
+      - name: Install Terragrunt and OpenTofu
+        uses: gruntwork-io/terragrunt-action@v3
+        with:
+          tg_version: '0.82.2'
+          tofu_version: '1.10.1'
 
       - name: Set necessary envs
         run: |
