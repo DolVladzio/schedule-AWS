@@ -64,14 +64,14 @@ resource "aws_iam_user" "main" {
 
   name = each.value.user
   tags = { Group = each.value.tags }
-  
+
   depends_on = [aws_iam_group.main]
 }
 ##################################################################
 resource "aws_iam_user_group_membership" "main" {
   for_each = local.iam_user
 
-  user   = each.value.user
+  user = each.value.user
   groups = [
     for group in each.value.groups : aws_iam_group.main[group].name
   ]

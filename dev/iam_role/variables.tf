@@ -18,8 +18,8 @@ variable "iam_role" {
 ##################################################################
 variable "iam_user" {
   type = map(object({
-    user = string
-    tags = string
+    user   = string
+    tags   = string
     groups = list(string)
   }))
   description = "IAM users"
