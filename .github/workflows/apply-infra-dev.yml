@@ -3,8 +3,8 @@ name: "Dev: Terragrunt Infra Deploy"
 on:
   workflow_dispatch:
   push:
-    paths:
-      - 'dev/**'
+    branches:
+      - dev
 
 jobs:
   terragrunt:

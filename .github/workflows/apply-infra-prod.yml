@@ -3,8 +3,8 @@ name: "Prod: Terragrunt Infra Deploy"
 on:
   workflow_dispatch:
   push:
-    paths:
-      - 'prod/**'
+    branches:
+      - main
 
 jobs:
   terragrunt:
