@@ -39,9 +39,41 @@
 	"iam_user": {
 		"Developer": {
 			"user": "Developer",
-			"tags": "developer-iam-user",
+			"tags": "developer-group-iam-user"
+		},
+		"Vladzio": {
+			"user": "Vladzio",
+			"tags": "admin-groups-iam-user"
+		},
+		"Nobody": {
+			"user": "Nobody",
+			"tags": "auditor-group-iam-user"
+		}
+	},
+
+	"iam_groups": {
+		"Admins": {
+			"name": "admin-groups",
+			"path": "/",
 			"policy_arn": [
 				"arn:aws:iam::aws:policy/AdministratorAccess"
+			]
+		},
+		"Developers": {
+			"name": "developer-group",
+			"path": "/",
+			"policy_arn": [
+				"arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess",
+				"arn:aws:iam::aws:policy/IAMReadOnlyAccess",
+				"arn:aws:iam::aws:policy/CloudWatchLogsReadOnlyAccess",
+				"arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess"
+			]
+		},
+		"Auditors": {
+			"name": "auditor-group",
+			"path": "/",
+			"policy_arn": [
+				"arn:aws:iam::aws:policy/ReadOnlyAccess"
 			]
 		}
 	}

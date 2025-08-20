@@ -18,10 +18,18 @@ variable "iam_role" {
 ##################################################################
 variable "iam_user" {
   type = map(object({
-    user       = string
-    tags       = string
-    policy_arn = list(string)
+    user = string
+    tags = string
   }))
   description = "IAM users"
+}
+##################################################################
+variable "iam_groups" {
+  type = map(object({
+    name       = string
+    path       = string
+    policy_arn = list(string)
+  }))
+  description = "IAM groups"
 }
 ##################################################################
