@@ -12,6 +12,6 @@ output "iam_groups" {
 }
 ##################################################################
 output "backup_role_arns" {
-  value = { for name, arn in aws_iam_role.backup_role : name => arn.arn }
+  value = { for name, arn in aws_iam_role.allow : name => arn.arn }
 }
 ##################################################################

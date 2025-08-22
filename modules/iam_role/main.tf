@@ -28,7 +28,7 @@ locals {
   }
 }
 ##################################################################
-resource "aws_iam_role" "backup_role" {
+resource "aws_iam_role" "allow" {
   for_each = local.iam_role
 
   name = each.value.name
@@ -47,7 +47,7 @@ resource "aws_iam_role" "backup_role" {
   })
 }
 ##################################################################
-resource "aws_iam_role_policy_attachment" "backup_attach" {
+resource "aws_iam_role_policy_attachment" "main" {
   for_each = {
     for idx, val in local.flattened_attachments :
     "${val.role}-${basename(val.policy_arn)}" => val
@@ -56,7 +56,7 @@ resource "aws_iam_role_policy_attachment" "backup_attach" {
   role       = each.value.role
   policy_arn = each.value.policy_arn
 
-  depends_on = [aws_iam_role.backup_role]
+  depends_on = [aws_iam_role.allow]
 }
 ##################################################################
 resource "aws_iam_user" "main" {

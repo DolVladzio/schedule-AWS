@@ -59,6 +59,7 @@
 			]
 		}
 	},
+
 	"iam_groups": {
 		"dev-admin-group": {
 			"name": "dev-admin-group",
@@ -72,9 +73,12 @@
 			"path": "/",
 			"policy_arn": [
 				"arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess",
-				"arn:aws:iam::aws:policy/IAMReadOnlyAccess",
+				"arn:aws:iam::aws:policy/AmazonEKSDashboardConsoleReadOnly",
 				"arn:aws:iam::aws:policy/CloudWatchLogsReadOnlyAccess",
-				"arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess"
+				"arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess",
+				"arn:aws:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly",
+				"arn:aws:iam::789279989320:policy/secret-manager-Developer-permissions",
+				"arn:aws:iam::aws:policy/AmazonQDeveloperAccess"
 			]
 		},
 		"dev-auditor-group": {
