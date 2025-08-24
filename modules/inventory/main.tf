@@ -68,3 +68,17 @@ resource "aws_s3_object" "object" {
   ]
 }
 ##################################################################
+resource "aws_s3_bucket_versioning" "main" {
+  for_each = var.inventory_bucket
+
+  bucket = aws_s3_bucket.main[each.value.bucket_name].id
+  versioning_configuration {
+    status = each.value.versioning_configuration_status
+  }
+
+  depends_on = [
+    "aws_s3_bucket.main",
+    "local_file.ansible_inventory"
+  ]
+}
+##################################################################
