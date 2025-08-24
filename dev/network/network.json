@@ -50,6 +50,60 @@
 			]
 		}
 	},
+
+	"network_acl": {
+		"dev-public_subnet_acl": {
+			"vpc": "dev-main-vpc",
+			"public_subnets": [
+				"dev-vpc-subnet"
+			],
+			"ingress": [
+				{
+					"rule_no": 100,
+					"protocol": "tcp",
+					"action": "allow",
+					"cidr_block": "0.0.0.0/0",
+					"from_port": 22,
+					"to_port": 22
+				},
+				{
+					"rule_no": 110,
+					"protocol": "tcp",
+					"action": "allow",
+					"cidr_block": "0.0.0.0/0",
+					"from_port": 80,
+					"to_port": 80
+				},
+				{
+					"rule_no": 120,
+					"protocol": "tcp",
+					"action": "allow",
+					"cidr_block": "0.0.0.0/0",
+					"from_port": 443,
+					"to_port": 443
+				},
+				{
+					"rule_no": 200,
+					"protocol": "tcp",
+					"action": "allow",
+					"cidr_block": "0.0.0.0/0",
+					"from_port": 1024,
+					"to_port": 65535
+				}
+			],
+			"egress": [
+				{
+					"rule_no": 100,
+					"protocol": "-1",
+					"action": "allow",
+					"cidr_block": "0.0.0.0/0",
+					"from_port": 0,
+					"to_port": 0
+				}
+			]
+		}
+	},
+
 	"security_groups": {
 		"dev-eks-node-sg": {
 			"name": "dev-eks-node-sg",
