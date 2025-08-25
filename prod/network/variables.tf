@@ -20,6 +20,29 @@ variable "vpc" {
   description = "List of VPC configurations"
 }
 ##################################################################
+variable "network_acl" {
+  type = map(object({
+    vpc            = string
+    public_subnets = list(string)
+    ingress = list(object({
+      rule_no    = number
+      protocol   = string
+      action     = string
+      cidr_block = string
+      from_port  = number
+      to_port    = number
+    }))
+    egress = list(object({
+      rule_no    = number
+      protocol   = string
+      action     = string
+      cidr_block = string
+      from_port  = number
+      to_port    = number
+    }))
+  }))
+}
+##################################################################
 variable "security_groups" {
   type = map(object({
     name        = string

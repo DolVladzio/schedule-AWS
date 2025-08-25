@@ -90,6 +90,45 @@ resource "aws_nat_gateway" "nt" {
   tags = { Name = "${each.value.name}-nat-gateway" }
 }
 ##################################################################
+resource "aws_network_acl" "public_subnet_acl" {
+  for_each = var.network_acl
+
+  vpc_id = aws_vpc.main-vpc[each.value.vpc].id
+  subnet_ids = [
+    for subnet in each.value.public_subnets : aws_subnet.subnets[subnet].id
+  ]
+
+  # Inbound rules
+  dynamic "ingress" {
+    for_each = each.value.ingress
+
+    content {
+      rule_no    = ingress.value.rule_no
+      protocol   = ingress.value.protocol
+      action     = ingress.value.action
+      cidr_block = ingress.value.cidr_block
+      from_port  = ingress.value.from_port
+      to_port    = ingress.value.to_port
+    }
+  }
+
+  # Outbound rules
+  dynamic "egress" {
+    for_each = each.value.egress
+
+    content {
+      rule_no    = egress.value.rule_no
+      protocol   = egress.value.protocol
+      action     = egress.value.action
+      cidr_block = egress.value.cidr_block
+      from_port  = egress.value.from_port
+      to_port    = egress.value.to_port
+    }
+  }
+
+  tags = { Name = "${each.value.vpc}-public-acl" }
+}
+##################################################################
 resource "aws_route_table" "public" {
   for_each = { for k, v in local.vpcs : k => v if local.vpc_has_public_subnets[k] }
 

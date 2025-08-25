@@ -36,9 +36,10 @@ variable "db_secret_managers" {
 ##################################################################
 variable "inventory_bucket" {
   type = map(object({
-    bucket_name      = string
-    bucket_key_value = string
-    force_destroy    = bool
+    bucket_name                     = string
+    bucket_key_value                = string
+    force_destroy                   = bool
+    versioning_configuration_status = string
   }))
 }
 ##################################################################
